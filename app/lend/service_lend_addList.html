@@ -1,0 +1,112 @@
+<section id="service_lend_addList">
+  <div class="container-fluid">
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">รายชื่อผู้ยืมอุปกรณ์</h5>
+          </div>
+        </fieldset>
+
+        <div class="form-horizontal">
+          <div class="row ng-table-search-box">
+            <div class="col-sm-2">
+              <button class="btn btn-raised w-100 ripple text-bold ng-scope" ng-click="vm.addList()">+
+                ยืมอุปกรณ์ <span class="md-ripple"></span></button>
+              <p></p>
+            </div>
+            <div class="col-sm-4 pull-right pb">
+              <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+                <input class="form-control" type="text" placeholder="Search..." ng-model="vm.globalSearchTerm"
+                  ng-change="vm.applyGlobalSearch()">
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+              <colgroup>
+                <col width="15%" />
+                <col width="15%" />
+                <col width="20%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="15%" />
+              </colgroup>
+
+              <tr ng-repeat="data in $data">
+
+                <td data-title="'เลขที่ใบยืม'" sortable="'RO_NBR'">
+                  {{data.RO_NBR}}
+                </td>
+                <td data-title="'รหัสบัตรประชาชน'" sortable="'CMAD_CITIZEN'">
+                  {{data.CMAD_CITIZEN}}
+                </td>
+                <td data-title="'ชื่อ-นามสกุล (ผู้มีสิทธิ์ยืม)'" sortable="'RO_NAME'">
+                  {{data.RO_NAME}}
+                </td>
+                <td data-title="'วันที่ยืม'" sortable="'RO_LOAN'">
+                  {{data.RO_LOAN}}
+                </td>
+                <td data-title="'กำหนดคืน'" sortable="'RO_RETURNED'">
+                  <span title="กำหนดคืน {{data.warnExp}} วัน" style="padding: inherit; background-color: #ffef00;"
+                    ng-if="data.RO_STATUS == 'BORROW' && (data.warnExp >= 0 && data.warnExp <= 15)">{{data.RO_RETURNED}}</span>
+                  <span title="กำหนดคืน {{data.warnExp}} วัน"
+                    style="padding: inherit; background-color: red; color: white;"
+                    ng-if="data.RO_STATUS == 'BORROW' && data.warnExp < 0">{{data.RO_RETURNED}}</span>
+
+                  <span ng-if="data.RO_STATUS == 'BORROW' && data.warnExp > 15">{{data.RO_RETURNED}}</span>
+                  <span ng-if="data.RO_STATUS == 'RETURNED'">{{data.RO_RETURNED}}</span>
+                </td>
+                <td data-title="'สถานะ'" sortable="'RO_STATUS'">
+                  <span style="color: red;" ng-if="data.RO_STATUS == 'BORROW'">ยืม</span>
+                  <span style="color: green;" ng-if="data.RO_STATUS == 'RETURNED'">คืน</span>
+                </td>
+                <td data-title="'#'">
+                  <button class="btn btn-warning btn-sm" ng-click="vm.detail(data.RO_NBR)">
+                    <span class="glyphicon glyphicon-search" style="font-size: 15px;"></span>
+                  </button>
+                  <button class="btn btn-primary btn-sm" ng-click="vm.print_index(data)">
+                    <span class="glyphicon glyphicon-print" style="font-size: 14px;"></span>
+                  </button>
+                  <button class="btn btn-danger btn-sm" ng-click="vm.renew(data.RO_NBR,data.RO_STATUS)"
+                    ng-disabled="data.RO_STATUS == 'RETURNED' && data.RO_COUNT_EXP == 1"
+                    style="padding: 0px 7px; line-height: 1.4;">
+                    <em class="ion-md-time" style="font-size: 21px;"></em>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="7" ng-if="vm.List_borrow.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
+<style>
+  .cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width: auto;
+    height: 300px;
+  }
+
+  .red {
+    color: red;
+  }
+
+  .image-upload>input {
+    display: none;
+  }
+
+  .IMG {
+    height: 560px;
+  }
+</style>

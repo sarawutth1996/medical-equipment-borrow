@@ -1,0 +1,255 @@
+<section id="report_count_items_">
+  <div class="container-fluid">
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">รายงานจำนวนยืม</h5>
+            <div class="toolset pull-right">
+              <a class="ripple pl-sm" ng-click="vm.clear()"><img svg-replace="svg-replace"
+                  ng-src="dist/img/icons/clear.svg"></a>
+              <a class="ripple pl-sm" ng-click="vm.readPDF()"><img svg-replace="svg-replace"
+                  ng-src="dist/img/icons/print.svg"></a>
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-horizontal">
+
+          <div class="form-group" style="margin-bottom: 0px;" ng-if="vm.show == true">
+            <label class="col-sm-2 control-label">ศูนย์ :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.rp.si1" ng-enter="vm.siteID1()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.siteID1()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div ng-if="vm.si_province == true">
+              <label class="col-sm-2 control-label">ถึง :</label>
+              <div class="col-sm-4" style="margin-bottom: 15px;">
+                <div class="input-group">
+                  <input class="form-control" type="text" ng-model="vm.rp.si2" ng-enter="vm.siteID2()" readonly>
+                  <div class="input-group-btn dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.siteID2()">
+                      <span class="caret"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">รหัสอุปกรณ์ :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.rp.ast1" ng-enter="vm.astID1()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.astID1()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <div class="input-group" style="margin-bottom: 15px;">
+                <input class="form-control" type="text" ng-model="vm.rp.ast2" ng-enter="vm.astID2()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.astID2()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">วันที่ยืม(ค.ศ) :</label>
+            <div class="col-sm-4">
+              <div class="input-group" style="margin-bottom: 15px;">
+                <input type="text" class="form-control text-center" ng-model="vm.loan_date" ng-required="true"
+                  is-open="vm.loan_up.opened" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="vm.loan_dateOptions"
+                  close-text="Close" ui-mask="99/99/9999" ui-mask-placeholder ui-mask-placeholder-char="_"
+                  placeholder="DD/MM/YYYY" model-view-value="true" />
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="vm.loan_calendar()">
+                    <span class="ion ion-md-calendar"></span></button>
+                </div>
+              </div>
+            </div>
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <div class="input-group" style="margin-bottom: 15px;">
+                <input type="text" class="form-control text-center" ng-model="vm.returned_date" ng-required="true"
+                  is-open="vm.returned_up.opened" uib-datepicker-popup="dd/MM/yyyy"
+                  datepicker-options="vm.returned_dateOptions" close-text="Close" ui-mask="99/99/9999"
+                  ui-mask-placeholder ui-mask-placeholder-char="_" placeholder="DD/MM/YYYY" model-view-value="true" />
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="vm.returned_calendar()">
+                    <span class="ion ion-md-calendar"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">เรียงจาก :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <select class="form-control" style="text-align-last: center;" ng-model="vm.rp.status">
+                <option value="" selected>มากไปน้อย</option>
+                <option>น้อยไปมาก</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script type="text/ng-template" id="siteID1.modal">
+    <div class="m">
+        <div class="row ng-table-search-box">
+          <div class="col-sm-6 pull-right pb">
+            <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+              <input class="form-control" type="text" placeholder="Search..."  
+                ng-model="vm.globalSearchTerm_siteID1" ng-change="vm.applyGlobalSearch_siteID1()">
+            </div>
+          </div>
+        </div>
+    
+        <table ng-table="vm.table_siteID1" class="table table-condensed table-bordered table-striped text-center">
+          <colgroup>
+            <col width="30%"/>
+            <col width="70%"/>
+          </colgroup>
+          
+          <tr ng-repeat="data in $data" ng-click="vm.click_siteID1(data.si_site)">
+            <td data-title="'รหัส'" sortable="'si_site'" > {{data.si_site}} </td>
+            <td data-title="'รายละเอียด'" sortable="'si_desc'" >  {{data.si_desc}} </td>
+          </tr>
+          <tr>
+            <td colspan="2" ng-if="vm.List_siteID1.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+        </tr>
+        </table>	
+      </div>						
+  </script>
+
+<script type="text/ng-template" id="siteID2.modal">
+    <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_siteID2" ng-change="vm.applyGlobalSearch_siteID2()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_siteID2" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+        
+        <tr ng-repeat="data in $data" ng-click="vm.click_siteID2(data.si_site)">
+          <td data-title="'รหัส'" sortable="'si_site'" > {{data.si_site}} </td>
+          <td data-title="'รายละเอียด'" sortable="'si_desc'" >  {{data.si_desc}} </td>
+        </tr>
+        <tr>
+          <td colspan="2" ng-if="vm.List_siteID2.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>		
+  </script>
+
+<script type="text/ng-template" id="astID1.modal">
+    <div class="m">
+        <div class="row ng-table-search-box">
+          <div class="col-sm-6 pull-right pb">
+            <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+              <input class="form-control" type="text" placeholder="Search..."  
+                ng-model="vm.globalSearchTerm_astID1" ng-change="vm.applyGlobalSearch_astID1()">
+            </div>
+          </div>
+        </div>
+    
+        <table ng-table="vm.table_astID1" class="table table-condensed table-bordered table-striped text-center">
+          <colgroup>
+            <col width="30%"/>
+            <col width="70%"/>
+          </colgroup>
+    
+          <tr ng-repeat="data in $data" ng-click="vm.click_astID1(data.AST_ASSET)">
+            <td data-title="'รหัสอุปกรณ์'" sortable="'AST_ASSET'" > {{data.AST_ASSET}} </td>
+            <td data-title="'รายละเอียด'" sortable="'AST_DESC'" >  {{data.AST_DESC}} </td>
+          </tr>
+          <tr>
+            <td colspan="4" ng-if="vm.List_astID1.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+        </tr>
+        </table>	
+      </div>						
+  </script>
+
+<script type="text/ng-template" id="astID2.modal">
+    <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_astID2" ng-change="vm.applyGlobalSearch_astID2()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_astID2" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="40%"/>
+          <col width="60%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.click_astID2(data.AST_ASSET)">
+          <td data-title="'รหัส'" sortable="'AST_ASSET'" > {{data.AST_ASSET}} </td>
+          <td data-title="'รายละเอียด'" sortable="'AST_DESC'" >  {{data.AST_DESC}} </td>
+        </tr>
+        <tr>
+          <td colspan="4" ng-if="vm.List_astID2.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+  </script>
+
+<script type="text/ng-template" id="site.modal">
+    <div class="m">
+        <div class="row ng-table-search-box">
+          <div class="col-sm-6 pull-right pb">
+            <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+              <input class="form-control" type="text" placeholder="Search..."  
+                ng-model="vm.globalSearchTerm_site" ng-change="vm.applyGlobalSearch_site()">
+            </div>
+          </div>
+        </div>
+    
+        <table ng-table="vm.table_site" class="table table-condensed table-bordered table-striped text-center">
+          <colgroup>
+            <col width="30%"/>
+            <col width="30%"/>
+          </colgroup>
+    
+          <tr ng-repeat="data in $data" ng-click="vm.click_site(data.user_site)">
+            <td data-title="'รหัส'" sortable="'user_site'" > {{data.user_site}} </td>
+            <td data-title="'สถานที่'" sortable="'si_site'">   {{data.si_desc}} </td>
+          </tr>
+          <tr>
+            <td colspan="5" ng-if="vm.List_site.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+        </tr>
+        </table>	
+      </div>						
+  </script>

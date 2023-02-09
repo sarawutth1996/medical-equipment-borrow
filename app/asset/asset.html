@@ -1,0 +1,290 @@
+<script type="text/ng-template" id="asset-changeStat.modal">
+  <div class="card m">
+    <div class="card-heading">
+      <div class="card-title"> เปลี่ยนสถานะ </div>
+    </div>
+    
+    <div class="card-footer">
+      <form name="Form" class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">รหัสอุปกรณ์ :</label>
+          <div class="col-sm-4">
+            <p class="form-control-static">{{ vm.data.id }}</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-4 control-label">สถานะ :</label>
+          <div class="col-sm-4">
+            <select class="form-control" ng-model="vm.data.stat" ng-if="!vm.show('stat')" ng-change="vm.change()">
+              <option ng-repeat="data in vm.sData" value="{{data.id}}">{{ data.name }}</option>
+            </select>
+
+            <p class="form-control-static" ng-if="vm.show('stat')">รับคืนจากส่งซ่อม</p>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="vm.show('detail')">
+          <label class="col-sm-4 control-label">วันที่ :</label>
+          <div class="col-sm-4">
+            <div class="input-group">
+              <input class="form-control text-center" type="text" 
+                placeholder="DD/MM/YYYY" 
+                ng-model="vm.data.dat"  
+                uib-datepicker-popup="dd/MM/yyyy" 
+                datepicker-options="vm.dateOptions" 
+                is-open="vm.opendate" 
+                close-text="Close"  
+                ui-mask="99/99/9999" 
+                model-view-value="true" 
+                ui-mask-placeholder />
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="button" style="margin-left:-2px" ng-click="vm.opendate=true">
+                  <span class="ion ion-md-calendar"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="vm.show('detail')">
+          <label class="col-sm-4 control-label">มูลค่า :</label>
+          <div class="col-sm-4">
+              <input class="form-control text-right" type="text" ng-model="vm.data.price" awnum="price">
+          </div>
+        </div>
+
+        <div class="form-group" ng-if="vm.show('detail')">
+          <label class="col-sm-4 control-label">{{ vm.txt }} :</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" ng-model="vm.data.rep">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-4 control-label">หมายเหตุ :</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" ng-model="vm.data.rmk">
+          </div>
+        </div>
+
+        <div class="form-group pt">
+          <div class="col-sm-4 col-sm-offset-4">
+            <button class="btn btn-raised btn-success ripple w-100" type="sumbit" ng-click="vm.click()"> บันทึก </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="asset-EDIT.modal">
+  <div class="card m">
+    <div class="card-heading">
+      <div class="card-title"> แก้ไขข้อมูล </div>
+    </div>
+    
+    <div class="card-footer">
+      <form name="Form" class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">รหัสอุปกรณ์ :</label>
+          <div class="col-sm-4">
+            <p class="form-control-static">{{ vm.data.id }}</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">หมวด :</label>
+          <div class="col-sm-4">
+            <p class="form-control-static">{{ vm.mData.typ_desc }}</p>
+          </div>
+
+          <label class="col-sm-2 control-label">หมู่ :</label>
+          <div class="col-sm-4">
+            <p class="form-control-static">{{ vm.mData.cls_desc }}</p>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-sm-2 control-label">หน่วยนับ :</label>
+          <div class="col-sm-4">
+            <ui-select ng-model="vm.data.ast_um">
+              <ui-select-match>{{ $select.selected.name }}</ui-select-match>
+              <ui-select-choices repeat="data.id as data in vm.modal | filter:$select.search" position='down'>
+                <span ng-bind-html="data.id | highlight: $select.search"></span>
+                :: <span ng-bind-html="data.name | highlight: $select.search"></span>
+              </ui-select-choices>
+            </ui-select>    
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">รายละเอียด :</label>
+          <div class="col-sm-10">
+            <input class="form-control" type="text" ng-model="vm.data.ast_desc">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">เลขที่ครุภัณฑ์ :</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" ng-model="vm.data.ast_inv_nbr" uppercase-only>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label"><span class="text-red">*</span> วันที่ซื้อ : {{ vm.dat }}</label>
+          <div class="col-sm-4">
+            <div class="input-group">
+              <input class="form-control text-center" type="text" 
+                required
+                placeholder="DD/MM/YYYY" 
+                ng-model="vm.data.ast_pur_date"  
+                uib-datepicker-popup="dd/MM/yyyy" 
+                datepicker-options="vm.dateOptions" 
+                is-open="vm.opendate" 
+                close-text="Close"  
+                ui-mask="99/99/9999" 
+                model-view-value="true" 
+                ui-mask-placeholder />
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="button" style="margin-left:-2px" ng-click="vm.opendate = true">
+                  <span class="ion ion-md-calendar"></span>
+                </button>
+              </div>
+            </div> 
+          </div>
+
+          <label class="col-sm-2 control-label">เลขที่เอกสารการซื้อ :</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" ng-model="vm.data.ast_po_nbr" uppercase-only>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">ผู้ขาย :</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" ng-model="vm.data.ast_vend">
+          </div>
+
+          <label class="col-sm-2 control-label">มูลค่าซื้อ :</label>
+          <div class="col-sm-4">
+            <input class="form-control text-right" type="text" ng-model="vm.data.ast_rt_price" awnum="price">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label"><span class="text-red">*</span> ปีงบประมาณ :</label>
+          <div class="col-sm-4">
+            <input class="form-control text-center" type="text" ng-model="vm.data.ast_budget_year" 
+              required
+              placeholder="YYYY"
+              ui-mask="9999" model-view-value="true"
+              ui-mask-placeholder ui-mask-placeholder-char="space" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-2 control-label">งบประมาณจาก :</label>
+          <div class="col-sm-4 pt-md">
+            <div class="mb"> 
+              <label class="mda-radio">
+                <input type="radio" ng-model="vm.data.ast_budget_from" ng-value="'กองทุนฟื้นฟู'">
+                <em class="bg-cyan-500"></em>กองทุนฟื้นฟู
+              </label>
+            </div>
+
+            <div class="mb"> 
+              <label class="mda-radio">
+                <input type="radio" ng-model="vm.data.ast_budget_from" ng-value="'บริจาค'">
+                <em class="bg-cyan-500"></em>บริจาค
+              </label>
+            </div>
+
+            <label class="mda-radio mb col-sm-4">
+              <input type="radio" ng-model="vm.data.ast_budget_from" ng-value="'อื่นๆ'">
+              <em class="bg-cyan-500"></em>อื่นๆ               
+            </label>              
+            <div class="col-sm-8" style="margin-top: -6px; padding:0px;">
+              <input class="form-control" type="text" placeholder="หมายเหตุ" ng-model="vm.data.ast_rmks" disable>   
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group pt">
+          <div class="col-sm-4 col-sm-offset-4">
+            <button class="btn btn-raised btn-success ripple w-100" 
+              type="sumbit" ng-click="vm.click()" 
+              ng-disabled="Form.$invalid || Form.$pristine"> 
+              บันทึก 
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</script>
+
+<section id="asset">
+  <div class="container-fluid">    
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">กำหนดอุปกรณ์</h5>
+          </div>
+        </fieldset>
+
+        <div class="form-horizontal">
+          <div class="row ng-table-search-box">
+            <div class="col-sm-2">
+              <button class="btn btn-raised w-100 ripple text-bold" ui-sref="app.asset.asset_add">+ เพิ่มอุปกรณ์</button>
+            </div>
+
+            <div class="col-sm-4 pull-right pb">
+              <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+                <input class="form-control" type="text" placeholder="Search..."  
+                  ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+              </div>
+            </div>
+          </div>
+      
+          <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+            <colgroup>
+              <col width="15%"/>
+              <col width="20%"/>
+              <col width="20%"/>
+              <col width="20%"/>
+              <col width="10%"/>
+              <col width="15%"/>
+            </colgroup>
+
+            <tr ng-repeat="data in $data" >
+              <td data-title="'รหัสอุปกรณ์'" sortable="'id'" filter="{id: 'text'}">{{ data.id }}</td>
+              <td data-title="'รายละเอียด'" sortable="'ast_desc'" filter="{ast_desc: 'text'}">{{ data.ast_desc }}</td>
+              <td data-title="'หมวด'" sortable="'typ_desc'" filter="{typ_desc: 'text'}">{{ data.typ_desc }}</td>
+              <td data-title="'หมู่'" sortable="'cls_desc'" filter="{cls_desc: 'text'}">{{ data.cls_desc }}</td>                     
+              <td data-title="'สถานะ'" sortable="'ast_status'" 
+                filter="{ast_status: 'select'}" filter-data="vm.filter">                 
+                {{ data.ast_status }} 
+              </td> 
+              <td data-title="'จัดการ'">
+                <button class="btn btn-info btn-sm" title="เปลี่ยนสถานะ" ng-click="vm.change_status(data.id)" ng-disabled="vm.showButton(data.ast_status)">
+                  <span class="ion-md-settings"></span>
+                </button>
+
+                <button class="btn btn-warning btn-sm" title="แก้ไข" ng-click="vm.edit(data.id)">
+                  <span class="ion-md-create"></span>
+                </button>
+                
+                <button class="btn btn-danger btn-sm" title="ลบ" ng-click="vm.del(data.id)">
+                  <span class="ion-md-trash"></span>
+                </button>
+              </td>
+            </tr>
+          </table>	
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

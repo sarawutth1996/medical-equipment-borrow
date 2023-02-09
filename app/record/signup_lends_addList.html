@@ -1,0 +1,60 @@
+<section id="borrower_addList">
+    <div class="container-fluid">
+        <div class="card mb0">
+            <div class="card-body">
+                <fieldset>
+                    <div class="card-heading pb0 pr0">
+                        <h5 class="pull-left m0">รายชื่อทะเบียนผู้มีสิทธิ์ยืม</h5>
+                    </div>
+                </fieldset>
+
+                <div class="form-horizontal">
+                    <div class="row ng-table-search-box">
+                        <div class="col-sm-3">
+                            <button class="btn btn-raised w-100 ripple text-bold ng-scope" ng-click="vm.addList()">+
+                                เพิ่มทะเบียนผู้มีสิทธิ์ยืม <span class="md-ripple"></span></button>
+                            <p></p>
+                        </div>
+                        <div class="col-sm-4 pull-right pb">
+                            <div class="input-group"><span class="input-group-addon"><em
+                                        class="ion-md-search icon-lg"></em></span>
+                                <input class="form-control" type="text" placeholder="Search..."
+                                    ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+                        <colgroup>
+                            <col width="20%" />
+                            <col width="30%" />
+                            <col width="15%" />
+                            <col width="10%" />
+                        </colgroup>
+
+                        <tr ng-repeat="data in $data">
+                            <td data-title="'รหัสบัตรประชาชน'" sortable="'CMAD_ID'">
+                                {{data.CMAD_CITIZEN != '' ? data.CMAD_CITIZEN : '-'}}</td>
+                            <td data-title="'ชื่อ'" sortable="'CMAD_NAME'"> {{data.CMAD_TITLE}} {{data.CMAD_NAME}}
+                            </td>
+                            <td data-title="'ประเภท'" sortable="'CMAD_TYPE'">
+                                {{data.CMAD_TYPE}} </td>
+                            <td data-title="'#'">
+                                <button class="btn btn-warning btn-sm" ng-click="vm.edit(data.CMAD_ID)">
+                                    <span class="ion-md-create"></span>
+                                </button>
+                                <button class="btn btn-danger btn-sm" ng-click="vm.del(data.CMAD_ID,data.CMAD_ADDR)">
+                                    <span class="ion-md-trash"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" ng-if="vm.record.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

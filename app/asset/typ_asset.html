@@ -1,0 +1,98 @@
+<script type="text/ng-template" id="typ_asset-EDIT.modal">
+  <div class="card m">
+    <div class="card-heading">
+      <div class="card-title"> แก้ไขข้อมูล </div>
+    </div>
+    
+    <div class="card-footer">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">รหัสหมวดอุปกรณ์ :</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" ng-model="vm.data.id" disable readonly>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-sm-4 control-label">รายละเอียด :</label>
+          <div class="col-sm-4">
+            <input class="form-control" type="text" autocomplete="off" ng-model="vm.data.name">
+          </div>
+        </div>
+
+        <div class="form-group pt">
+          <div class="col-sm-4 col-sm-offset-4">
+            <button class="btn btn-raised btn-success ripple w-100" type="sumbit" ng-click="vm.click()"> บันทึก </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</script>
+
+<section id="typ_asset">
+  <div class="container-fluid">    
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">กำหนดหมวดอุปกรณ์</h5>
+            <div class="toolset pull-right">
+              <a class="ripple pl-sm" ng-click="vm.clear()"><img svg-replace="svg-replace" ng-src="dist/img/icons/clear.svg"></a>
+              <a class="ripple pl-sm" ng-click="vm.save()"><img svg-replace="svg-replace" ng-src="dist/img/icons/save.svg"></a>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">รหัสหมวดอุปกรณ์ :</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" ng-model="vm.data.id" autofocus="" maxlength="2" uppercase-only >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-4 control-label">รายละเอียด :</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" ng-model="vm.data.name">
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-horizontal">
+          <div class="row ng-table-search-box">
+            <div class="col-sm-4 pull-right pb">
+              <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+                <input class="form-control" type="text" placeholder="Search..."  
+                  ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+              </div>
+            </div>
+          </div>
+      
+          <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+            <colgroup>
+              <col width="30%"/>
+              <col width="60%"/>
+              <col width="10%"/>
+            </colgroup>
+      
+            <tr ng-repeat="data in $data" >
+              <td data-title="'รหัสหมวดอุปกรณ์'" sortable="'id'"> {{data.id}} </td>
+              <td data-title="'รายละเอียด'" sortable="'name'"> {{data.name}} </td>
+              <td data-title="'จัดการ'">
+                <button class="btn btn-warning btn-sm" title="แก้ไข" ng-click="vm.edit(data)">
+                  <span class="ion-md-create"></span>
+                </button>
+
+                <button class="btn btn-danger btn-sm" title="ลบ" ng-click="vm.del(data.id)">
+                  <span class="ion-md-trash"></span>
+                </button>
+              </td>
+            </tr>
+          </table>	
+        </div>
+      </div>
+    </div>    
+  </div>
+</section>

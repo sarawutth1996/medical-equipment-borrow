@@ -1,0 +1,350 @@
+<section id="report_signup_lends">
+  <div class="container-fluid">
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">รายงานทะเบียนผู้มีสิทธิ์ยืม</h5>
+            <div class="toolset pull-right">
+              <a class="ripple pl-sm" ng-click="vm.clear()"><img svg-replace="svg-replace"
+                  ng-src="dist/img/icons/clear.svg"></a>
+              <a class="ripple pl-sm" ng-click="vm.readPDF()"><img svg-replace="svg-replace"
+                  ng-src="dist/img/icons/print.svg"></a>
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-horizontal">
+          <!--  -->
+          <div class="form-group" style="margin-bottom: 0px;" ng-hide="vm.show.prov == true">
+            <label class="col-sm-2 control-label">จังหวัด :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.rp.prov1" ng-enter="vm.provID1()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.provID1()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.rp.prov2" ng-enter="vm.provID2()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.provID2()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div class="form-group" style="margin-bottom: 0px;" ng-hide="vm.show.aump == true">
+            <label class="col-sm-2 control-label">อำเภอ :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.rp.aump1" ng-enter="vm.aumpID1()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.aumpID1()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.rp.aump2" ng-enter="vm.aumpID2()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.aumpID2()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div class="form-group" style="margin-bottom: 0px;" ng-hide="vm.show.site == true">
+            <label class="col-sm-2 control-label">ศูนย์ :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.rp.site1" ng-enter="vm.siteID1()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.siteID1()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.rp.site2" ng-enter="vm.siteID2()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.siteID2()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+   
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">ชื่อผู้มีสิทธิ์ยืม :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.rp.case1" ng-enter="vm.caseID1()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.caseID1()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4" style="margin-bottom: 15px;">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.rp.case2" ng-enter="vm.caseID2()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.caseID2()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+
+
+<script type="text/ng-template" id="provMID1.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_prov1" ng-change="vm.applyGlobalSearch_prov1()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_prov1" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.click_prov1(data.id)">
+          <td data-title="'รหัสจังหวัด'" sortable="'id'" > {{data.id}} </td>
+          <td data-title="'รายละเอียด'" sortable="'name'" >  {{data.name}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_prov1.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+<script type="text/ng-template" id="provMID2.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_prov2" ng-change="vm.applyGlobalSearch_prov2()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_prov2" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.click_prov2(data.id)">
+          <td data-title="'รหัสจังหวัด'" sortable="'id'" > {{data.id}} </td>
+          <td data-title="'รายละเอียด'" sortable="'name'" >  {{data.name}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_prov2.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+<script type="text/ng-template" id="aumpMID1.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_aump1" ng-change="vm.applyGlobalSearch_aump1()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_aump1" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.click_aump1(data.id)">
+          <td data-title="'รหัสอำเภอ'" sortable="'id'" > {{data.id}} </td>
+          <td data-title="'รายละเอียด'" sortable="'name'" >  {{data.name}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_aump1.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+<script type="text/ng-template" id="aumpMID2.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_aump2" ng-change="vm.applyGlobalSearch_aump2()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_aump2" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.click_aump2(data.id)">
+          <td data-title="'รหัสอำเภอ'" sortable="'id'" > {{data.id}} </td>
+          <td data-title="'รายละเอียด'" sortable="'name'" >  {{data.name}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_aump2.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+<script type="text/ng-template" id="siteID1.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_site1" ng-change="vm.applyGlobalSearch_site1()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_site1" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.click_site1(data.id)">
+          <td data-title="'รหัสศูนย์'" sortable="'id'" > {{data.id}} </td>
+          <td data-title="'รายละเอียด'" sortable="'name'" >  {{data.name}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_site1.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+<script type="text/ng-template" id="siteID2.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_site2" ng-change="vm.applyGlobalSearch_site2()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_site2" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.click_site2(data.id)">
+          <td data-title="'รหัสศูนย์'" sortable="'id'" > {{data.id}} </td>
+          <td data-title="'รายละเอียด'" sortable="'name'" >  {{data.name}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_site2.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+<script type="text/ng-template" id="caseID1.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_case1" ng-change="vm.applyGlobalSearch_case1()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_case1" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.click_case1(data.CMAD_ID)">
+          <td data-title="'รหัส'" sortable="'CMAD_ID'" > {{data.CMAD_ID}} </td>
+          <td data-title="'ชื่อ - นามสกุล'" sortable="'CMAD_NAME'" >  {{data.CMAD_NAME}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_case1.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+<script type="text/ng-template" id="caseID2.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_case2" ng-change="vm.applyGlobalSearch_case2()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_case2" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.click_case2(data.CMAD_ID)">
+          <td data-title="'รหัส'" sortable="'CMAD_ID'" > {{data.CMAD_ID}} </td>
+          <td data-title="'ชื่อ - นามสกุล'" sortable="'CMAD_NAME'" >  {{data.CMAD_NAME}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_case2.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>

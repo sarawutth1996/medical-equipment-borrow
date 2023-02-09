@@ -1,0 +1,31 @@
+<nav ng-controller="HeaderController as header">
+  <ul>
+    <li class="visible-xs visible-sm hidden-md" ng-class="{'active': sidebarVisible}">
+      <a class="menu-link menu-link-slide" href="" ng-click="toggleSidebar()">
+        <span><em></em></span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="pull-right">
+    <li class="dropdown" uib-dropdown>
+      <a class="dropdown-toggle has-badge ripple" uib-dropdown-toggle ng-click="header.changeCH('def')">
+        <em class="ion-md-contact"></em>
+        <div class="pl-md">{{globals.profile.fname}} {{globals.profile.lname}}</div>
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-right md-dropdown-menu profile" uib-dropdown-menu>
+        <a class="a ripple" ui-sref="app.setting">
+          <span class="icon"><em class="ion-md-settings"></em></span>
+          <span> แก้ไขบัญชีผู้ใช้ </span>  
+        </a>
+              
+        <div class="divider"></div>        
+        <div class="a ripple" ng-click=header.logout()>
+          <span class="icon"><em class="ion-md-log-out"></em></span>
+          <span> ออกจากระบบ </span>
+        </div>
+      </div>
+    </li>    
+  </ul>
+</nav>

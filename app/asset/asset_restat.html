@@ -1,0 +1,51 @@
+<section id="asset_restat">
+  <div class="container-fluid">    
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">คืนสถานะอุปกรณ์</h5>
+          </div>
+        </fieldset>
+        
+        <div class="form-horizontal">
+          <div class="row ng-table-search-box">
+            <div class="col-sm-4 pull-right pb">
+              <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+                <input class="form-control" type="text" placeholder="Search..."  
+                  ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+              </div>
+            </div>
+          </div>
+      
+          <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+            <colgroup>
+              <col width="15%"/>
+              <col width="25%"/>
+              <col width="20%"/>
+              <col width="20%"/>
+              <col width="12%"/>
+              <col width="8%"/>
+            </colgroup>
+      
+            <tr ng-repeat="data in $data" >
+              <td data-title="'รหัสอุปกรณ์'" sortable="'id'" filter="{id: 'text'}">{{ data.id }}</td>
+              <td data-title="'รายละเอียด'" sortable="'ast_desc'" filter="{ast_desc: 'text'}">{{ data.ast_desc }}</td>
+              <td data-title="'หมวด'" sortable="'typ_desc'" filter="{typ_desc: 'text'}">{{ data.typ_desc }}</td>
+              <td data-title="'หมู่'" sortable="'cls_desc'" filter="{cls_desc: 'text'}">{{ data.cls_desc }}</td>                     
+              <td data-title="'สถานะ'" sortable="'ast_status'" 
+                filter="{ast_status: 'select'}" filter-data="vm.filter">                 
+                {{ data.ast_status }} 
+              </td> 
+              <td data-title="'จัดการ'">
+                <button class="btn btn-info btn-sm" title="แก้ไข" ng-click="vm.restat(data)">
+                  <span class="ion-ios-undo"></span>
+                </button>
+              </td>
+            </tr>
+          </table>	
+        </div>
+      </div>
+    </div>    
+  </div>
+</section>

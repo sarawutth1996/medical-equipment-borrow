@@ -1,0 +1,8 @@
+<div data-preloader></div>
+<header class="header-container" ng-include="'app/header.tpl.html'"></header>
+<aside class="sidebar-container" ng-include="'app/sidebar.tpl.html'" style="overflow-y: hidden"></aside>
+<div class="sidebar-layout-obfuscator" ng-click="closeSidebar()"></div>
+<main class="main-container">
+  <section ui-view autoscroll="false" class="ng-fadeInLeftShort"></section>
+  <footer><span class="pull-right">© 2020 Double M Technology Management Co.,Ltd</span></footer>
+</main>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <!-- <base href="/TESTKEN/Borrow/"> -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+
+    <!-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" /> -->
+
+    <link rel="icon" href="dist/img/logo/icon_semi.png" sizes="25x25" type="image/png">
+    <title>ระบบยืม-คืนอุปกรณ์</title> 
+    
+    <link rel="stylesheet" href="dist/css/vendor.css">
+    <link rel="stylesheet" href="dist/css/app.css">
+  </head>
+  <body class="theme">
+    <loading show-loading="loading"></loading>
+    <div ui-view autoscroll="false" class="layout-container" ng-class="layout()"></div>
+
+    <script src="dist/js/vendor.js"></script>
+    <script src="dist/js/pdf.min.js"></script> 
+    <script src="dist/js/pdf.worker.min.js"></script> 
+    <script src="dist/js/all.js"></script>
+    <!-- <script src="dist/js/app.js"></script> -->
+    <script src="master/components/app/app.module.js"></script>
+    <script src="master/components/app/app.run.js"></script>
+
+    <script src="master/components/app/core/core.module.js"></script>
+    <script src="master/components/app/core/core.constant.js"></script>
+    <script src="master/components/app/core/core.config.js"></script>
+    <script src="master/components/app/core/core.run.js"></script>
+    <script src="master/components/app/core/core.service.js"></script>
+
+    <script src="master/components/app/router/router.module.js"></script>
+    <script src="master/components/app/router/router.config.js"></script>
+    <script src="master/components/app/router/router.run.js"></script>
+
+    <script src="master/components/app/loading/loading.module.js"></script>
+    <script src="master/components/app/loading/loading.config.js"></script>
+    <script src="master/components/app/loading/loading.run.js"></script>
+    <script src="master/components/app/loading/loading.directive.js"></script>
+
+    <script src="master/components/app/utils/utils.module.js"></script>
+    <script src="master/components/app/utils/ripple.directive.js"></script>
+    <script src="master/components/app/utils/ngEnter.directive.js"></script>
+    <script src="master/components/app/utils/svgreplace.directive.js"></script>
+    <script src="master/components/app/utils/showPassword.directive.js"></script>
+    <script src="master/components/app/utils/uppercase.directive.js"></script>
+    <script src="master/components/app/utils/alert.service.js"></script>
+
+    <script src="master/components/app/login.controller.js"></script>
+    <script src="master/components/app/header.controller.js"></script>
+    <script src="master/components/app/menu.controller.js"></script>
+    <script src="master/components/app/setting.controller.js"></script>
+    <script src="master/components/app/home.controller.js"></script>
+	
+	
+	
+	
+    <script src="master/components/lend/lend.module.js"></script>
+    <script src="master/components/lend/service_lend.controller.js"></script>
+    <script src="master/components/lend/report_status.controller.js"></script>
+    <script src="master/components/lend/report_count_items.controller.js"></script>
+	
+    <script src="master/components/record/signup_lends.module.js"></script>
+    <script src="master/components/record/signup_lends.controller.js"></script>
+    <script src="master/components/record/report_signup_lends.controller.js"></script>
+    
+    <script src="master/components/asset/asset.module.js"></script>
+    <script src="master/components/asset/typ_asset.controller.js"></script>
+    <script src="master/components/asset/group_asset.controller.js"></script>
+    <script src="master/components/asset/um_asset.controller.js"></script>
+    <script src="master/components/asset/asset.controller.js"></script>
+    <script src="master/components/asset/asset_add.controller.js"></script>
+    <script src="master/components/asset/asset_restat.controller.js"></script>
+    <script src="master/components/asset/asset_report.controller.js"></script>
+    <script src="master/components/asset/asset_report_label.controller.js"></script>
+    <script src="master/components/asset/asset_report_year.controller.js"></script>
+    <script src="master/components/asset/asset_report_year_prov.controller.js"></script>
+    <script src="master/components/asset/asset_report_repair.controller.js"></script>
+
+    <script src="master/components/admin/admin.module.js"></script>
+    <script src="master/components/admin/manage_site.controller.js"></script>    
+    <script src="master/components/admin/manage_exp_date.controller.js"></script>
+    <script src="master/components/admin/manage_user.controller.js"></script>
+    <script src="master/components/admin/admin_report_user.controller.js"></script>
+  </body>
+</html>

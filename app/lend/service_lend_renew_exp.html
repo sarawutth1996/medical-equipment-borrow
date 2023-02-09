@@ -1,0 +1,98 @@
+<section id="service_returnedItems">
+    <div class="container-fluid">
+        <div class="card mb0">
+            <div class="card-body">
+                <fieldset>
+                    <h5 class="pull-left m0"> ต่ออายุอุปกรณ์ </h5>
+                    <div class="col pull-right" style="color:gray; margin-top:2px">
+                        (จำนวนต่ออายุ {{vm.countExp}} ครั้ง)
+                    </div>
+                </fieldset>
+
+                <div class="form-horizontal">
+                    <table class="table table-bordered">
+                        <colgroup>
+                            <col width="50%" />
+                            <col width="50%" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>เลขที่ใบยืม</th>
+                                <td>{{vm.renewNBR}}</td>
+                            </tr>
+                            <tr>
+                                <th>วันที่ยืม(เอกสาร)</th>
+                                <td>{{vm.loan}}</td>
+                            </tr>
+                            <tr>
+                                <th style="vertical-align:middle">รูปแบบต่ออายุ</th>
+                                <td>
+                                    <ui-select search-enabled="false" theme="bootstrap" ng-model="vm.manday" 
+                                        
+                                        ng-disabled="vm.inv_status == 'RETURNED'"
+                                        ng-change="vm.select_exp()" style="text-align-last:center;">
+                                        <ui-select-match placeholder="เลือกรายการ">{{$select.selected.text}}</ui-select-match>
+                                        <ui-select-choices repeat="value.id as value in vm.options" group-by="'group'">
+                                            <span ng-bind-html="value.text"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </td>
+                            </tr>
+                            <!-- search-enabled -->
+                            <tr>
+                                <th style="vertical-align:middle">กำหนดคืน(เอกสาร)</th>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control text-center" ng-model="returned_date"
+                                            ng-required="true" is-open="returned_up.opened"
+                                            uib-datepicker-popup="dd/MM/yyyy" datepicker-options="returned_dateOptions"
+                                            close-text="Close" ui-mask="99/99/9999" ui-mask-placeholder
+                                            ui-mask-placeholder-char="_" placeholder="DD/MM/YYYY"
+                                            model-view-value="true" ng-disabled="true" />
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default"  ng-disabled="true"
+                                                ng-click="vm.returned_calendar()">
+                                                <span class="ion ion-md-calendar"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="col pull-left pb">
+                        <label class="control-label">รายการยืมอุปกรณ์มีดังนี้</label>
+                    </div>
+                    <table class="table table-striped m0" style="border-top: 1px solid rgba(0, 0, 0, 0.045);">
+                        <thead>
+                            <tr>
+                                <th scope="col " width="15%" style="text-align: center;">รหัสอุปกรณ์</th>
+                                <th scope="col " width="45%" style="text-align: center;">รายละเอียด</th>
+                                <th scope="col " width="20%" style="text-align: center;">เลขที่ครุภัณฑ์</th>
+                                <th scope="col " width="15%" style="text-align: center;">กำหนดคืน</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="order in vm.items">
+                                <td style="text-align: center;">{{order.ro_id}}</td>
+                                <td style="text-align: center;">{{order.ro_desc}}</td>
+                                <td style="text-align: center;">{{order.ast_inv_nbr}}</td>
+                                <td style="text-align: center;"> <input type="text" class="form-control text-center"
+                                        ng-disabled="true"
+                                        ng-model="loop_date[$index]" ng-required="true" is-open="loop_up[$index].opened"
+                                        uib-datepicker-popup="dd/MM/yyyy" datepicker-options="loop_dateOptions"
+                                        close-text="Close" ui-mask="99/99/9999" ui-mask-placeholder
+                                        ui-mask-placeholder-char="_" placeholder="DD/MM/YYYY" model-view-value="true"
+                                        ng-click="vm.loopIndex_calendar($index)" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align: center; margin-top: 25px; margin-bottom: 10px;" ng-hide="vm.inv_status == 'RETURNED'">
+                        <button class="btn btn-success text-bold btn-md btn-raised m0" ng-click="vm.save()">
+                            ต่ออายุ</button>
+                    </div>
+                </div> <!-- class="form-horizontal"-->
+            </div> <!-- class="card-body" -->
+        </div> <!-- class="card mb0" -->
+    </div> <!-- class="container-fluid" -->
+</section>

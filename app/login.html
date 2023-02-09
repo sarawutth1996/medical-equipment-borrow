@@ -1,0 +1,103 @@
+<script type="text/ng-template" id="login-si.modal">
+  <div class="m">
+    <div class="row ng-table-search-box">
+      <div class="col-sm-4 pull-right pb">
+        <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+          <input class="form-control" type="text" placeholder="Search..."  
+            ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+        </div>
+      </div>
+    </div>
+
+    <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+      <colgroup>
+        <col width="30%"/>
+        <col width="70%"/>
+      </colgroup>
+
+      <tr ng-repeat="data in $data" ng-click="vm.click(data)">
+        <td data-title="'รหัสสาขา'" sortable="'si_site'" > {{data.si_site}} </td>
+        <td data-title="'ชื่อสาขา'" sortable="'si_desc'" > {{data.si_desc}} </td>
+      </tr>
+    </table>	
+  </div>				
+</script>
+
+<section id="login">
+  <div class="container">
+    <div class="row d-flex">
+      <div class="col-md-10 pt align-self-center block-center">
+        <div class="card">
+          <div class="row m0 p-lg">
+            <div class="col-md-6">
+              <div class="login-logo">
+                <img src="dist/img/logo/logo.png" alt="logo" class="w-100">
+              </div>
+            </div>
+
+            <div class="col-md-6 p0 login">
+              <div class="card-body divine-line login-form" >
+
+                <form name="loginForm" class="form-validate w-100" ng-submit="vm.login()">
+                  <div class="form-group">
+                    <label> Username </label>
+
+                    <div class="input-group">
+                      <div class="input-group-addon fix-icon" ng-class="vm.checkValid(loginForm.username.$dirty ,loginForm.username.$error.required)" >
+                        <i class="ion ion-md-person"></i>
+                      </div>
+                      <input type="input" class="form-control" name="username" 
+                        placeholder="Username" ng-model="vm.user" autofocus=""
+                        required uppercase-only >
+                    </div>  
+                    <div class="text-danger text-sm" ng-if="loginForm.username.$dirty && loginForm.username.$error.required "> This field is required </div> 
+                  </div>
+
+                  <div class="form-group">
+                    <label> Password </label>
+                    <div class="input-group">
+                      <div class="input-group-addon fix-icon" 
+                        style="padding: 6px 13px;"
+                        ng-class="vm.checkValid(loginForm.password.$dirty ,loginForm.password.$error.required)" >
+                        <i class="ion ion-md-unlock"></i>
+                      </div>
+                      <input type="password" class="form-control" name="password" id="pw"
+                        placeholder="Password" ng-model="vm.pass" autocomplete="off" 
+                        required uppercase-only >
+                    </div>
+                    <div class="text-danger text-sm" ng-if="loginForm.password.$dirty && loginForm.password.$error.required"> This field is required </div> 
+                  </div>
+
+                  <div class="form-group">
+                    <label> Site </label>
+                    <div class="input-group">
+                      <div class="input-group-addon fix-icon" 
+                        style="padding: 6px 11px;"
+                        ng-class="vm.checkValid(loginForm.site.$dirty ,loginForm.site.$error.required)" >
+                        <i class="ion ion-md-people"></i>
+                      </div>
+
+                      <input type="text" class="form-control bg-white" name="site" id="st"
+                        placeholder="Site" ng-model="vm.mite" ng-enter="vm.modal_si()"
+                        required readonly>
+
+                      <div class="input-group-btn dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_si()">
+                          <span class="caret"></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <button type="submit" class="btn btn-block btn-primary mt-lg" ng-disabled="loginForm.$invalid || loginForm.$pristine" > Sign In </button>
+                </form>
+              </div>  
+            </div>          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="copyright">© 2020 Double M Technology Management Co.,Ltd.</div>
+</section>

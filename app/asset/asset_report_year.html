@@ -1,0 +1,188 @@
+<script type="text/ng-template" id="asset_report_year-prov.modal">
+  <div style="margin: 20px">
+    <div class="row ng-table-search-box">
+      <div class="col-sm-4 pull-right pb">
+        <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+          <input class="form-control" type="text" placeholder="Search..."  
+            ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+        </div>
+      </div>
+    </div>
+
+    <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+      <colgroup>
+        <col width="30%"/>
+        <col width="70%"/>
+      </colgroup>
+
+      <tr ng-repeat="data in $data" ng-click="vm.click(data.id)">
+        <td data-title="'รหัสจังหวัด'" sortable="'id'" >{{ data.id }}</td>
+        <td data-title="'รายละเอียด'" sortable="'name'" >{{ data.name }}</td>
+      </tr>
+    </table>	
+  </div>				
+</script>
+
+<script type="text/ng-template" id="asset_report_year-st.modal">
+  <div style="margin: 20px">
+    <div class="row ng-table-search-box">
+      <div class="col-sm-4 pull-right pb">
+        <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+          <input class="form-control" type="text" placeholder="Search..."  
+            ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+        </div>
+      </div>
+    </div>
+
+    <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+      <colgroup>
+        <col width="30%"/>
+        <col width="70%"/>
+      </colgroup>
+
+      <tr ng-repeat="data in $data" ng-click="vm.click(data.id)">
+        <td data-title="'รหัส'" sortable="'id'" >{{ data.id }}</td>
+        <td data-title="'สถานที่'" sortable="'name'" >{{ data.name }}</td>
+      </tr>
+    </table>	
+  </div>				
+</script>
+
+<script type="text/ng-template" id="asset_report_year-typ.modal">
+  <div style="margin: 20px">
+    <div class="row ng-table-search-box">
+      <div class="col-sm-4 pull-right pb">
+        <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+          <input class="form-control" type="text" placeholder="Search..."  
+            ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+        </div>
+      </div>
+    </div>
+
+    <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+      <colgroup>
+        <col width="30%"/>
+        <col width="70%"/>
+      </colgroup>
+
+      <tr ng-repeat="data in $data" ng-click="vm.click(data.id)">
+        <td data-title="'รหัสหมวดอุปกรณ์'" sortable="'id'" >{{ data.id }}</td>
+        <td data-title="'รายละเอียด'" sortable="'name'" >{{ data.name }}</td>
+      </tr>
+    </table>	
+  </div>				
+</script>
+
+<section id="asset_report_year">
+  <div class="container-fluid">    
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">รายงานงบประมาณตามปี</h5>
+            <div class="toolset pull-right">
+              <a class="ripple pl-sm" ng-click="vm.clear()"><img svg-replace="svg-replace" ng-src="dist/img/icons/clear.svg"></a>
+              <a class="ripple pl-sm" ng-click="vm.print()"><img svg-replace="svg-replace" ng-src="dist/img/icons/print.svg"></a>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-horizontal"> 
+          <div class="form-group" ng-if="vm.show.prov">
+            <label class="col-sm-2 control-label">จังหวัด :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.prov" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_prov(1)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.prov2" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_prov(2)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="vm.show.site">
+            <label class="col-sm-2 control-label">ศูนย์ :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.site" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_st(1)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.site2" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_st(2)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">หมวดอุปกรณ์ :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.typ" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_typ(1)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>    
+            </div>
+
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.typ2" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_typ(2)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">ปีงบประมาณ :</label>
+            <div class="col-sm-4">
+              <input class="form-control text-center" type="text" 
+                placeholder="YYYY" ng-model="vm.data.year"
+                ui-mask="9999" ui-mask-placeholder ui-mask-placeholder-char="space" >
+            </div>
+
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <input class="form-control text-center" type="text" 
+                placeholder="YYYY" ng-model="vm.data.year2"
+                ui-mask="9999" ui-mask-placeholder ui-mask-placeholder-char="space" >
+            </div>
+          </div>        
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

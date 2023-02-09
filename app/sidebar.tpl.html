@@ -1,0 +1,65 @@
+<div class="sidebar-header" style="text-align: center;">
+  <a class="sidebar-header-logo" ui-sref="app.home">
+    <img src="dist/img/logo/logo_sm.png" class="va-top"/>
+  </a>
+</div>
+
+
+<div class="sidebar-content" ng-controller="MenuController as menu" slim-scroll size="5px" height="calc(100vh - 65px)"> 
+  <nav class="sidebar-nav"> 
+    <ul ng-repeat="module in menu.menuItem" permission permission-only="module.pms">
+      <li class="menu-header">{{ module.name }}</li>
+      <li ng-repeat="item in module.items" 
+        ng-class="{ 'active': $state.includes(item.sref) || $state.is(item.sref) }"
+        permission permission-only="item.pms">  
+
+        <a class="ripple" ng-if="item.sref" ui-sref="{{ item.sref }}" title="{{ item.name }}">
+          <span class="nav-icon"><em ng-class="item.icon"></em></span>
+          <span>{{ item.name }}</span>
+        </a>
+
+        <a class="ripple" ng-if="item.subitems.length">
+          <span class="pull-right nav-caret">
+            <em class="ion ion-md-arrow-dropright"></em>
+          </span>
+          <span class="nav-icon">
+            <em ng-class="item.icon"></em>
+          </span>
+          <span>{{ item.name }}</span>
+        </a>
+        <ul ng-if="item.subitems.length">
+          <li ng-repeat="subitem in item.subitems" 
+            ng-class="{ 'active': $state.includes(subitem.sref) || $state.is(subitem.sref) }">
+            <a class="ripple" ui-sref="{{subitem.sref}}" title="{{subitem.name}}">
+              <span>{{ subitem.name }}</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul>
+      <li class="menu-header">ช่วยเหลือ</li>
+      <li>  
+        <a class="ripple" href="server/masterFile/คู่มือระบบยืม-คืนอุปกรณ์.pdf" download>
+          <span class="nav-icon"><em class="ion-md-cloud-download"></em></span>
+          <span>คู่มือการใช้งาน</span>
+        </a>
+      </li>
+
+      <li>  
+        <a class="ripple" href="https://erp.365supplychain.com/CRM/#/login/THBES" target="_blank" >
+          <span class="nav-icon"><em class="ion-md-link"></em></span>
+          <span>แจ้งปัญหา</span>
+        </a>
+      </li>
+	  
+	    <li>  
+        <a class="ripple" ui-sref="app.version" title="เวอร์ชั่น">
+          <span class="nav-icon"><em class="ion-md-pricetag"></em></span>
+          <span>เวอร์ชั่น</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

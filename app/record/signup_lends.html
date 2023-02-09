@@ -1,0 +1,345 @@
+<script type="text/ng-template" id="List_patient.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="60%"/>
+          <col width="10%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data">
+          <td data-title="'รหัส'" sortable="'addr'" > {{data.CMAD_REF}} </td>
+          <td data-title="'ชื่อ - นามสกุล'" sortable="'fullname'" > {{data.CMAD_TITLE}} {{data.CMAD_NAME}} </td>
+          <td data-title="'#'"> 
+            <button class="btn btn-success btn-sm"  ng-click="vm.click(data,$index)">
+              <b><span class="glyphicon glyphicon-plus"></span></b>
+            </button>
+         
+        </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.oList.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+
+
+<section id="borrower">
+  <div class="container-fluid">
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0" ng-if="vm.AddList">เพิ่มทะเบียนผู้มีสิทธิ์ยืม</h5>
+            <h5 class="pull-left m0" ng-if="vm.EdiList">แก้ไขทะเบียนผู้มีสิทธิ์ยืม</h5>
+            <div class="toolset pull-right">
+              <a class="ripple pl-sm" ng-click="vm.clear()" ng-if="vm.AddList"><img svg-replace="svg-replace"
+                  ng-src="dist/img/icons/clear.svg"></a>
+              <a class="ripple pl-sm" ng-click="vm.save(vm.show)"><img svg-replace="svg-replace"
+                  ng-src="dist/img/icons/save.svg"></a>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">ประเภท <span class="red">*</span> : </label>
+            <div class="col-sm-6 pt-md">
+              <label class="col-sm-4 mda-radio">
+                <input type="radio" ng-model="vm.show" ng-value="'ผู้มีสิทธิ์ยืม'" ng-click="vm.radio('1')"
+                  ng-disabled="vm.btnDis_end" /><em class="bg-cyan-500"></em>ผู้มีสิทธิ์ยืม
+              </label>
+              <label class="col-sm-4 mda-radio">
+                <input type="radio" ng-model="vm.show" ng-value="'ผู้ยืม'" ng-click="vm.radio('2')"
+                  ng-disabled="vm.btnDis_pat" /><em class="bg-cyan-500"></em>ผู้ยืม
+              </label>
+              <label class="col-sm-4 mda-radio">
+                <input type="radio" ng-model="vm.show" ng-value="'ผู้รับรอง'" ng-click="vm.radio('3')"
+                  ng-disabled="vm.btnDis_Guarantor" /><em class="bg-cyan-500"></em>ผู้รับรอง
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="vm.is_Guarantor" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">ตำแหน่ง <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" ng-model="vm.data.pos" id="pos" style="margin-bottom: 15px;">
+            </div>
+            <label class="col-sm-2 control-label">สังกัด :</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" ng-model="vm.data.division" id="division" style="margin-bottom: 15px;">
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="vm.is_endorser" style="margin-bottom: 15px;">
+            <label class="col-sm-2 control-label">โรงพยาบาล :</label>
+            <div class="col-sm-4">
+              <p class="form-control-static">{{ vm.data.hpt }}</p>
+            </div>
+          </div>
+
+
+
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">คำนำหน้า <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <ui-select theme="bootstrap" ng-model="vm.data.title" style="margin-bottom: 15px;">
+                <ui-select-match>{{$select.selected.text}}</ui-select-match>
+                <ui-select-choices repeat="value.text as value in options | filter: {text:$select.search}"
+                                   group-by="'group'">
+                    <span ng-bind-html="value.text | highlight: $select.search"></span>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <label class="col-sm-2 control-label">ชื่อ - นามสกุล <span class="red">*</span> :</label>
+            <div class="col-sm-4">
+              <input class="form-control" id="fullname" type="text" ng-model="vm.data.fullname" maxlength="36"
+                style="margin-bottom: 15px;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">วันเกิด(ค.ศ) <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <div class="input-group" style="margin-bottom: 15px;">
+                <input type="text" class="form-control" ng-model="vm.date" ng-required="true" id="HBD"
+                  is-open="vm.calen_up.opened" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="vm.dateOptions"
+                  close-text="Close" ui-mask="99/99/9999" ui-mask-placeholder ui-mask-placeholder-char="_"
+                  placeholder="DD/MM/YYYY" model-view-value="true" ng-keyup="vm.valueDate()" />
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="vm.calendar()">
+                    <span class="ion ion-md-calendar"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <label class="col-sm-2 control-label">รหัสบัตรประชาชน <span class="red" ng-hide="vm.is_Guarantor">*</span>
+              :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="citizen" ng-model="vm.data.citizen"
+                ui-mask="9-9999-99999-99-9" ui-mask-placeholder ui-mask-placeholder-char="_" model-view-value="true"
+                style="margin-bottom: 15px;">
+            </div>
+          </div>
+
+          <div class="form-group" ng-if="vm.is_endorser" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">Hn <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="hn" ng-model="vm.data.hn"
+                oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="10" style="margin-bottom: 15px;">
+            </div>
+
+            <label class="col-sm-2 control-label">Ward <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="ward" ng-model="vm.data.ward" style="margin-bottom: 15px;">
+            </div>
+
+            <label class="col-sm-2 control-label">โรค <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="disease" ng-model="vm.data.disease"
+                style="margin-bottom: 15px;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">บ้านเลขที่ <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="addressNo" ng-model="vm.data.addressNo" maxlength="20"
+                style="margin-bottom: 15px;">
+            </div>
+
+            <label class="col-sm-2 control-label">หมู่ :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="villNo" ng-model="vm.data.villNo" maxlength="3"
+                style="margin-bottom: 15px;">
+            </div>
+
+            <label class="col-sm-2 control-label">ชื่อหมู่บ้าน :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="villName" ng-model="vm.data.villName" maxlength="25"
+                style="margin-bottom: 15px;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">ห้องเลขที่ :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="room" ng-model="vm.data.room" maxlength="10"
+                style="margin-bottom: 15px;">
+            </div>
+
+            <label class="col-sm-2 control-label">ชั้นที่ :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="floor" ng-model="vm.data.floor" maxlength="20"
+                style="margin-bottom: 15px;">
+            </div>
+
+            <label class="col-sm-2 control-label">ชื่ออาคาร :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="building" ng-model="vm.data.building" maxlength="40"
+                style="margin-bottom: 15px;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">ตรอก/ซอย :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="troksoi" ng-model="vm.data.troksoi"
+                style="margin-bottom: 15px;">
+            </div>
+
+            <label class="col-sm-2 control-label">ถนน :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" id="road" ng-model="vm.data.road" style="margin-bottom: 15px;">
+            </div>
+
+            <label class="col-sm-2 control-label">จังหวัด <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <ui-select ng-model="vm.md_prov" on-select="vm.pushPROV(vm.md_prov)" style="margin-bottom: 15px;"
+                required>
+                <ui-select-match>{{ $select.selected.PRO_PROVINCE_DESC }}</ui-select-match>
+                <ui-select-choices repeat="city in vm.prov | filter:$select.search" position='down'>
+                  <span ng-bind-html="city.PRO_PROVINCE_DESC | highlight: $select.search"></span>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+          </div>
+
+
+
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">เขต/อำเภอ <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <ui-select ng-model="vm.md_aump" on-select="vm.pushAUMP(vm.md_aump)" style="margin-bottom: 15px;"
+                required>
+                <ui-select-match>{{ $select.selected.PRO_AUMPHUR_DESC }}</ui-select-match>
+                <ui-select-choices repeat="aump in vm.aump | filter:$select.search" position='down'>
+                  <span ng-bind-html="aump.PRO_AUMPHUR_DESC | highlight: $select.search"></span>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+
+
+            <label class="col-sm-2 control-label">แขวง/ตำบล <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <ui-select ng-model="vm.md_dist" on-select="vm.pushDIST(vm.md_dist)" style="margin-bottom: 15px;"
+                required>
+                <ui-select-match>{{ $select.selected.PRO_TUMBOL_DESC }}</ui-select-match>
+                <ui-select-choices repeat="dist in vm.dist | filter:$select.search" position='down'>
+                  <span ng-bind-html="dist.PRO_TUMBOL_DESC | highlight: $select.search"></span>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+
+
+
+
+            <label class="col-sm-2 control-label">รหัสไปรษณีย์ <span class="red">*</span> :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" ng-model="vm.data.zipcode" id="zipcode"
+                oninput="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="5" style="margin-bottom: 15px;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0px;">
+            <label class="col-sm-2 control-label">โทรศัพท์ 1 :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" ng-model="vm.data.tel1" id="tel1" style="margin-bottom: 15px;"
+                maxlength="25">
+            </div>
+            <label class="col-sm-2 control-label">โทรศัพท์ 2 :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" ng-model="vm.data.tel2" id="tel2" style="margin-bottom: 15px;"
+              maxlength="25">
+            </div>
+            <label class="col-sm-2 control-label">แฟ็กซ์ :</label>
+            <div class="col-sm-2">
+              <input class="form-control" type="text" ng-model="vm.data.fax" id="fax" ui-mask="9-9999-9999"
+                ui-mask-placeholder ui-mask-placeholder-char="_" model-view-value="true" style="margin-bottom: 15px;">
+            </div>
+          </div>
+
+
+          <hr ng-if="vm.is_patient">
+          <div class="form-group" ng-if="vm.is_patient" style="margin-bottom: 0px;">
+            <div class="col-sm-12">
+              <div class="form-group col-sm-4 pull-right"
+                style="margin-right: -30px; margin-left: -30px; margin-top: 10px;">
+                <div class="col-sm-12">
+                  <div class="input-group" style="margin-bottom: 10px;">
+                    <input class="form-control" type="text" ng-enter="vm.modal_list()" style="text-align: center;"
+                      placeholder="เลือกผู้มีสิทธิ์ยืม" readonly>
+                    <div class="input-group-btn dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_list()">
+                        <span class="glyphicon glyphicon-search"></span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col pull-left pb" style="color: gray;  padding: 15px 0px 15px 10px; margin-top: 12px;">
+                แสดงทั้งหมด {{vm.BHList.length}} รายการ
+              </div>
+              <table class="table table-striped" style="border-top: 1px solid rgba(0, 0, 0, 0.045);">
+                <thead>
+                  <tr>
+                    <th scope="col " width="10%" style="text-align: center;">ลำดับ</th>
+                    <th scope="col " width="15%" style="text-align: center;">รหัส</th>
+                    <th scope="col " width="35%" style="text-align: center;">ชื่อ - นามสกุล</th>
+                    <th scope="col " width="20%" style="text-align: center;">ความสัมพันธ์</th>
+                    <th scope="col " width="10%" style="text-align: center;">#</th>
+                  </tr>
+
+                </thead>
+                <tbody>
+                  <tr ng-repeat="order in vm.BHList">
+                    <td style="text-align: center;">{{$index + 1}}</td>
+                    <td style="text-align: center;">{{order.CMAD_REF}}</td>
+                    <td style="text-align: center;">{{order.CMAD_TITLE}} {{order.CMAD_NAME}}</td>
+                    <td style="text-align: center;"><input class="form-control" ng-model="order.CMAD_RLTS"></td>
+                    <td style="text-align: center;">
+                      <button class="btn btn-danger btn-sm" ng-click="vm.delItems(order,$index)">
+                        <span class="glyphicon glyphicon-minus"></span>
+                      </button></td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" ng-if="vm.BHList.length == 0" style="text-align: center; padding: 8px;">
+                      ไม่พบข้อมูล</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+</section>
+
+<style>
+  .cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width: auto;
+    height: 300px;
+  }
+
+  .red {
+    color: red;
+  }
+
+  .image-upload>input {
+    display: none;
+  }
+</style>

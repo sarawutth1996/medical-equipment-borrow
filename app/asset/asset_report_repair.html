@@ -1,0 +1,230 @@
+<script type="text/ng-template" id="asset_report_repair-st.modal">
+  <div style="margin: 20px">
+    <div class="row ng-table-search-box">
+      <div class="col-sm-4 pull-right pb">
+        <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+          <input class="form-control" type="text" placeholder="Search..."  
+            ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+        </div>
+      </div>
+    </div>
+
+    <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+      <colgroup>
+        <col width="30%"/>
+        <col width="70%"/>
+      </colgroup>
+
+      <tr ng-repeat="data in $data" ng-click="vm.click(data.id)">
+        <td data-title="'รหัส'" sortable="'id'" >{{ data.id }}</td>
+        <td data-title="'สถานที่'" sortable="'name'" >{{ data.name }}</td>
+      </tr>
+    </table>	
+  </div>				
+</script>
+
+<script type="text/ng-template" id="asset_report_repair-ast.modal">
+  <div style="margin: 20px">
+    <div class="row ng-table-search-box">
+      <div class="col-sm-4 pull-right pb">
+        <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+          <input class="form-control" type="text" placeholder="Search..."  
+            ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+        </div>
+      </div>
+    </div>
+
+    <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+      <colgroup>
+        <col width="30%"/>
+        <col width="70%"/>
+      </colgroup>
+
+      <tr ng-repeat="data in $data" ng-click="vm.click(data.id)">
+        <td data-title="'รหัสอุปกรณ์'" sortable="'id'" >{{ data.id }}</td>
+        <td data-title="'รายละเอียด'" sortable="'name'" >{{ data.name }}</td>
+      </tr>
+    </table>	
+  </div>				
+</script>
+
+<script type="text/ng-template" id="asset_report_repair-typ.modal">
+  <div style="margin: 20px">
+    <div class="row ng-table-search-box">
+      <div class="col-sm-4 pull-right pb">
+        <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+          <input class="form-control" type="text" placeholder="Search..."  
+            ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+        </div>
+      </div>
+    </div>
+
+    <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+      <colgroup>
+        <col width="30%"/>
+        <col width="70%"/>
+      </colgroup>
+
+      <tr ng-repeat="data in $data" ng-click="vm.click(data.id)">
+        <td data-title="'รหัสหมวดอุปกรณ์'" sortable="'id'" >{{ data.id }}</td>
+        <td data-title="'รายละเอียด'" sortable="'name'" >{{ data.name }}</td>
+      </tr>
+    </table>	
+  </div>				
+</script>
+
+<section id="asset_report_repair">
+  <div class="container-fluid">    
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">รายงานมูลค่าซ่อมอุปกรณ์</h5>
+            <div class="toolset pull-right">
+              <a class="ripple pl-sm" ng-click="vm.clear()"><img svg-replace="svg-replace" ng-src="dist/img/icons/clear.svg"></a>
+              <a class="ripple pl-sm" ng-click="vm.print()"><img svg-replace="svg-replace" ng-src="dist/img/icons/print.svg"></a>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-horizontal"> 
+          <div class="form-group" ng-if="vm.show">
+            <label class="col-sm-2 control-label">ศูนย์ :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.site">
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_st(1)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.site2">
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_st(2)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">รหัสอุปกรณ์ :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.id">
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_ast(1)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>    
+            </div>
+
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.id2">
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_ast(2)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">หมวด :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.typ">
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_typ(1)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>    
+            </div>
+
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.data.typ2">
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_typ(2)">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">วันที่ซื้อ :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control text-center" type="text" 
+                  placeholder="DD/MM/YYYY"
+                  ng-model="vm.data.dat"  
+                  uib-datepicker-popup="dd/MM/yyyy" 
+                  datepicker-options="vm.dateOptions" 
+                  is-open="vm.opendate"
+                  close-text="Close" 
+                  ui-mask="99/99/9999"
+                  model-view-value="true" 
+                  ui-mask-placeholder />
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="button" style="margin-left:-2px" ng-click="vm.opendate = true">
+                    <span class="ion ion-md-calendar"></span>
+                  </button>
+                </div>
+              </div>  
+            </div>
+
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control text-center" type="text" 
+                  placeholder="DD/MM/YYYY"
+                  ng-model="vm.data.dat2"  
+                  uib-datepicker-popup="dd/MM/yyyy" 
+                  datepicker-options="vm.dateOptions" 
+                  is-open="vm.opendate2"
+                  close-text="Close" 
+                  ui-mask="99/99/9999"
+                  model-view-value="true" 
+                  ui-mask-placeholder />
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="button" style="margin-left:-2px" ng-click="vm.opendate2=true">
+                    <span class="ion ion-md-calendar"></span>
+                  </button>
+                </div>
+              </div>  
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">ผู้ซ่อม :</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" ng-model="vm.data.usp">
+            </div>
+
+            <label class="col-sm-2 control-label">ถึง :</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" ng-model="vm.data.usp2">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+

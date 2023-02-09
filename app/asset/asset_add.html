@@ -1,0 +1,165 @@
+<section id=asset_add">
+  <div class="container-fluid">    
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">เพิ่มอุปกรณ์</h5>
+            <div class="toolset pull-right">
+              <a class="ripple pl-sm" ng-click="vm.clear()"><img svg-replace="svg-replace" ng-src="dist/img/icons/clear.svg"></a>
+              <a class="ripple pl-sm" ng-click="vm.save()" ng-class="{linkDisabled: saveForm.$invalid || saveForm.$pristine}">
+                <img svg-replace="svg-replace" ng-src="dist/img/icons/save.svg">
+              </a>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-horizontal">
+          <form name="saveForm">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">รหัสอุปกรณ์ :</label>
+              <div class="col-sm-4">
+                <p class="form-control-static">{{ vm.mData.site + vm.data.ast_type + vm.data.ast_class }}xxx</p>
+              </div>
+
+              <label class="col-sm-2 control-label">จำนวน :</label>
+              <div class="col-sm-4">
+                <input class="form-control text-right" type="number" ng-model="vm.qty" ng-blur="vm.nom()" min="1" max="100">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><span class="text-red">*</span> หมวด :</label>
+              <div class="col-sm-4">
+                <ui-select ng-model="vm.data.ast_type" on-select="vm.select_typ($model)" required>
+                  <ui-select-match>{{ $select.selected.name }}</ui-select-match>
+                  <ui-select-choices repeat="data.id as data in vm.modal.typ | filter:$select.search" position='down'>
+                    <span ng-bind-html="data.id | highlight: $select.search"></span>
+                    :: <span ng-bind-html="data.name | highlight: $select.search"></span>
+                  </ui-select-choices>
+                </ui-select> 
+              </div>
+
+              <label class="col-sm-2 control-label"><span class="text-red">*</span> หมู่ :</label>
+              <div class="col-sm-4">
+                <ui-select ng-model="vm.cls" ng-disabled="!vm.data.ast_type" on-select="vm.select_cls($model)" required>
+                  <ui-select-match>{{ $select.selected.name }}</ui-select-match>
+                  <ui-select-choices repeat="data in vm.modal.cls | filter:$select.search" position='down'>
+                    <span ng-bind-html="data.id | highlight: $select.search"></span>
+                    :: <span ng-bind-html="data.name | highlight: $select.search"></span>
+                  </ui-select-choices>
+                </ui-select>  
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><span class="text-red">*</span> หน่วยนับ :</label>
+              <div class="col-sm-4">
+                <ui-select ng-model="vm.data.ast_um" required>
+                  <ui-select-match>{{ $select.selected.name }}</ui-select-match>
+                  <ui-select-choices repeat="data.id as data in vm.modal.um | filter:$select.search" position='down'>
+                    <span ng-bind-html="data.id | highlight: $select.search"></span>
+                    :: <span ng-bind-html="data.name | highlight: $select.search"></span>
+                  </ui-select-choices>
+                </ui-select>    
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">รายละเอียด :</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="text" ng-model="vm.data.ast_desc">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">เลขที่ครุภัณฑ์ :</label>
+              <div class="col-sm-4">
+                <input class="form-control" type="text" ng-model="vm.data.ast_inv_nbr" uppercase-only>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><span class="text-red">*</span> วันที่ซื้อ : {{ vm.dat }}</label>
+              <div class="col-sm-4">
+                <div class="input-group">
+                  <input class="form-control text-center" type="text" 
+                    required
+                    placeholder="DD/MM/YYYY" 
+                    ng-model="vm.data.ast_pur_date"  
+                    uib-datepicker-popup="dd/MM/yyyy" 
+                    datepicker-options="vm.dateOptions" 
+                    is-open="vm.opendate" 
+                    close-text="Close"  
+                    ui-mask="99/99/9999" 
+                    model-view-value="true" 
+                    ui-mask-placeholder />
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" style="margin-left:-2px" ng-click="vm.opendate = true">
+                      <span class="ion ion-md-calendar"></span>
+                    </button>
+                  </div>
+                </div> 
+              </div>
+
+              <label class="col-sm-2 control-label">เลขที่เอกสารการซื้อ :</label>
+              <div class="col-sm-4">
+                <input class="form-control" type="text" ng-model="vm.data.ast_po_nbr" uppercase-only>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">ผู้ขาย :</label>
+              <div class="col-sm-4">
+                <input class="form-control" type="text" ng-model="vm.data.ast_vend">
+              </div>
+
+              <label class="col-sm-2 control-label">มูลค่าซื้อ :</label>
+              <div class="col-sm-4">
+                <input class="form-control text-right" type="text" ng-model="vm.data.ast_rt_price" awnum="price">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label"><span class="text-red">*</span> ปีงบประมาณ :</label>
+              <div class="col-sm-4">
+                <input class="form-control text-center" type="text" ng-model="vm.data.ast_budget_year" 
+                  required
+                  placeholder="YYYY"
+                  ui-mask="9999" model-view-value="true"
+                  ui-mask-placeholder ui-mask-placeholder-char="space" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">งบประมาณจาก :</label>
+              <div class="col-sm-4 pt-md">
+                <div class="mb"> 
+                  <label class="mda-radio">
+                    <input type="radio" ng-model="vm.data.ast_budget_from" ng-value="'กองทุนฟื้นฟู'">
+                    <em class="bg-cyan-500"></em>กองทุนฟื้นฟู
+                  </label>
+                </div>
+
+                <div class="mb"> 
+                  <label class="mda-radio">
+                    <input type="radio" ng-model="vm.data.ast_budget_from" ng-value="'บริจาค'">
+                    <em class="bg-cyan-500"></em>บริจาค
+                  </label>
+                </div>
+
+                <label class="mda-radio mb col-sm-3">
+                  <input type="radio" ng-model="vm.data.ast_budget_from" ng-value="'อื่นๆ'">
+                  <em class="bg-cyan-500"></em>อื่นๆ               
+                </label>              
+                <div class="col-sm-9" style="margin-top: -6px; padding:0px;">
+                  <input class="form-control" type="text" placeholder="หมายเหตุ" ng-model="vm.data.ast_rmks" disable>   
+                </div>
+              </div>
+            </div>
+          </form>
+        </fieldset>
+      </div>
+    </div>    
+  </div>
+</section>

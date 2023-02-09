@@ -1,0 +1,125 @@
+<script type="text/ng-template" id="manage_user-cm.modal">
+  <div class="m">
+    <div class="row ng-table-search-box">
+      <div class="col-sm-4 pull-right pb">
+        <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+          <input class="form-control" type="text" placeholder="Search..."  
+            ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+        </div>
+      </div>
+    </div>
+
+    <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+      <colgroup>
+        <col width="30%"/>
+        <col width="70%"/>
+      </colgroup>
+
+      <tr ng-repeat="data in $data" ng-click="vm.click(data)">
+        <td data-title="'รหัสสถานที่'" sortable="'id'" > {{data.id}} </td>
+        <td data-title="'ชื่อสถานที่'" sortable="'name'" > {{data.name}} </td>
+      </tr>
+    </table>	
+  </div>				
+</script>
+
+<section id="manage_user">
+  <div class="container-fluid">
+    
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">กำหนดข้อมูลบัญชีผู้ใช้</h5>
+            <div class="toolset pull-right">
+              <a class="ripple pl-sm" ng-click="vm.clear()"><img svg-replace="svg-replace" ng-src="dist/img/icons/clear.svg"></a>
+              <a class="ripple pl-sm" ng-click="vm.save()"><img svg-replace="svg-replace" ng-src="dist/img/icons/save.svg"></a>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">Username :</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" ng-model="vm.data.user" uppercase-only>    
+            </div>
+
+            <label class="col-sm-2 control-label">Password :</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" ng-model="vm.data.pass" uppercase-only>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">ชื่อ :</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" ng-model="vm.data.fname">
+            </div>
+
+            <label class="col-sm-2 control-label">นามสกุล :</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" ng-model="vm.data.lname">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">สถานที่ :</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input class="form-control" type="text" ng-model="vm.site_name" ng-enter="vm.modal_si()" readonly>
+                <div class="input-group-btn dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.modal_si()">
+                    <span class="caret"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="form-horizontal">
+          <div class="row ng-table-search-box">
+            <div class="col-sm-4 pull-right pb">
+              <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+                <input class="form-control" type="text" placeholder="Search..."  
+                  ng-model="vm.globalSearchTerm" ng-change="vm.applyGlobalSearch()">
+              </div>
+            </div>
+          </div>
+      
+          <table ng-table="vm.table" class="table table-condensed table-bordered table-striped text-center">
+            <colgroup>
+              <col width="15%"/>
+              <col width="33%"/>
+              <col width="32%"/>
+              <col width="15%"/>
+              <col width="5%"/>
+            </colgroup>
+
+            <tr ng-repeat="data in $data" >
+              <td data-title="'Username'" sortable="'user_name'" filter="{user_name: 'text'}"> {{data.user_name}} </td>
+              <td data-title="'ชื่อ-นามสกุล'" sortable="'name'" filter="{name: 'text'}"> {{data.name}} </td>
+              <td data-title="'สถานที่'" sortable="'si_desc'" filter="{si_desc: 'text'}"> {{data.si_desc}} </td>              
+              <td data-title="'สถานะ'" sortable="'status'" 
+                filter="{status: 'select'}" filter-data="vm.filter.stat"> 
+                <button type="button" class="btn btn-raised w-100 ripple"
+                  ng-class = "vm.actClass(data.status)"
+                  ng-click = "vm.click(data)">
+                  {{data.status}} 
+                </button> 
+              </td> 
+
+              <td data-title="'ลบ'"> 
+                <button class="btn btn-danger btn-sm" title="ลบ" ng-click="vm.del(data)">
+                  <span class="ion-md-trash"></span>
+                </button>
+              </td> 
+            </tr>
+          </table>	
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

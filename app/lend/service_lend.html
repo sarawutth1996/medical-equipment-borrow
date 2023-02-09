@@ -1,0 +1,527 @@
+<script type="text/ng-template" id="MDselList_A.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_MDA" ng-change="vm.applyGlobalSearch_MDA()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_A" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.clickA(data)">
+          <td data-title="'รหัส'" sortable="'addr'" > {{data.CMAD_ID}} </td>
+          <td data-title="'ชื่อ - นามสกุล'" sortable="'fullname'" > {{data.CMAD_TITLE}}{{data.CMAD_NAME}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_MDA.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+<script type="text/ng-template" id="MDselList_B.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_MDB" ng-change="vm.applyGlobalSearch_MDB()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_B" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.clickB(data)">
+          <td data-title="'รหัส'" sortable="'addr'" > {{data.CMAD_ID}} </td>
+          <td data-title="'ชื่อ - นามสกุล'" sortable="'fullname'" > {{data.CMAD_TITLE}}{{data.CMAD_NAME}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_MDB.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+<script type="text/ng-template" id="MDselList_C.modal">
+  <div class="m">
+      <div class="row ng-table-search-box">
+        <div class="col-sm-6 pull-right pb">
+          <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+            <input class="form-control" type="text" placeholder="Search..."  
+              ng-model="vm.globalSearchTerm_MDC" ng-change="vm.applyGlobalSearch_MDC()">
+          </div>
+        </div>
+      </div>
+  
+      <table ng-table="vm.table_C" class="table table-condensed table-bordered table-striped text-center">
+        <colgroup>
+          <col width="30%"/>
+          <col width="70%"/>
+        </colgroup>
+  
+        <tr ng-repeat="data in $data" ng-click="vm.clickC(data)">
+          <td data-title="'รหัส'" sortable="'addr'" > {{data.CMAD_ID}} </td>
+          <td data-title="'ชื่อ - นามสกุล'" sortable="'fullname'" > {{data.CMAD_TITLE}}{{data.CMAD_NAME}} </td>
+        </tr>
+        <tr>
+          <td colspan="5" ng-if="vm.List_MDC.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+      </tr>
+      </table>	
+    </div>						
+</script>
+
+<script type="text/ng-template" id="MDselList_items.modal">
+  <div class="card m">
+      <div class="card-heading">
+        <div class="card-title" style="text-align:center"> รายการอุปกรณ์ </div>
+      </div>
+      
+      <div class="card-footer" uib-collapse="vm.hide.pass">
+          <div class="row ng-table-search-box">
+              <div class="col-sm-4 pull-right pb">
+                <div class="input-group"><span class="input-group-addon"><em class="ion-md-search icon-lg"></em></span>
+                  <input class="form-control" type="text" placeholder="Search..."  
+                    ng-model="vm.globalSearchTerm_MDitems" ng-change="vm.applyGlobalSearch_MDitems()">
+                </div>
+              </div>
+            </div>
+        
+            <table ng-table="vm.table_items" class="table table-condensed table-hover table-bordered table-striped text-center">
+              <colgroup>
+                <col width="20%"/>
+                <col width="15%"/>
+                <col width="40%"/>
+                <col width="5%"/>
+              </colgroup>
+        
+              <tr ng-repeat="items in $data">
+                <td data-title="'เลขที่ครุภัณฑ์'">{{items.AST_INV_NBR}}</td>
+                <td data-title="'รหัสอุปกรณ์'">{{items.AST_ASSET}}</td>
+                <td data-title="'รายละเอียด'">{{items.AST_DESC}}</td>
+                <td data-title="'#'"> 
+                    <button class="btn btn-success btn-sm"  ng-click="vm.clickitems(items)">
+                      <b><span class="glyphicon glyphicon-plus"></span></b>
+                    </button>
+                 
+                </td>
+              </tr>
+              <tr>
+                <td colspan="5" ng-if="vm.items_data.length == 0" style="padding: 8px;">ไม่พบข้อมูล</td>
+            </tr>
+            </table>
+      </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="SETupload.modal">
+  <div class="card m">
+      <div class="card-heading">
+        <div class="card-title"> รูปภาพ </div>
+      </div>
+      
+      <div class="card-footer">
+        <form name="Edit" class="form-horizontal">	
+          <center>		
+           <div class="cropArea">
+            <img-crop image="myImage" area-type="circle" result-image="myCroppedImage" result-image-size="500">
+            </img-crop>
+          </div>
+        </center>
+        <div class="form-group pt m0">
+            <div class="col-sm-4 col-sm-offset-4">
+              <button class="btn btn-raised btn-success ripple w-100" type="button" ng-click="vm.selectIMG('myCroppedImage')"> ตกลง </button>
+            </div>
+          </div>
+        </form>
+       
+      </div>   <!-- footer -->
+    </div>			
+  
+</script>
+
+<script type="text/ng-template" id="MDshowIMG.modal">
+ <img class="IMG" ng-src="{{Modal_IMG}}" style="width:100%"/>
+</script>
+
+<section id="itemsBorrow">
+  <div class="container-fluid">
+    <div class="card mb0">
+      <div class="card-body">
+        <fieldset>
+          <div class="card-heading pb0 pr0">
+            <h5 class="pull-left m0">ระบบยืมอุปกรณ์</h5>
+          </div>
+        </fieldset>
+        <fieldset>
+          <div class="image-upload" style="text-align: center; padding-top: 5px;">
+            <input id="fileInput" type="file" />
+          </div>
+          <uib-tabset active="vm.active">
+            <uib-tab index="1" heading="STEP 1 : เลือกผู้ยืม" ng-click="vm.Tabs('1')" disable="false">
+              <div class="container-fluid">
+                <fieldset class="form-horizontal" style="padding-bottom: 0px; margin-top: -15px;">
+                  <div class="toolset pull-right" style="padding-bottom: 10px; padding-right: 10px;">
+                    <a class="ripple pl-sm" ng-click="vm.clear()"><img svg-replace="svg-replace"
+                        ng-src="dist/img/icons/clear.svg"></a>
+                  </div>
+                </fieldset>
+
+                <fieldset class="form-horizontal" style="padding-bottom: 0px;">
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label">เลือกผู้มีสิทธิ์ยืม :</label>
+                    <div class="col-sm-3">
+                      <div class="input-group" style="margin-bottom: 10px;">
+                        <input class="form-control text-center" type="text" id="MDAID" ng-model="vm.dataA.id"
+                          ng-enter="vm.selList_A()" placeholder="- กรุณาเลือก -" readonly>
+                        <div class="input-group-btn dropdown">
+                          <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.selList_A()">
+                            <span class="caret"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">ชื่อ - นามสกุล :</label>
+                    <div class="col-sm-6" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataA.fullname != '' ? vm.dataA.fullname : '-'}}</p>
+                    </div>
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">เบอร์โทรศัพท์ 1 :</label>
+                    <div class="col-sm-2" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataA.tel != '' ? vm.dataA.tel : '-'}}</p>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">ที่อยู่ :</label>
+                    <div class="col-sm-6" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataA.address != '' ? vm.dataA.address : '-'}}</p>
+                    </div>
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">เบอร์โทรศัพท์ 2 :</label>
+                    <div class="col-sm-2" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataA.tel2 != '' ? vm.dataA.tel2 : '-'}}</p>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">Hn :</label>
+                    <div class="col-sm-2" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataA.Hn != '' ? vm.dataA.Hn : '-'}}</p>
+                    </div>
+
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">Ward :</label>
+                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                      <p class="form-control-static">{{vm.dataA.Ward != '' ? vm.dataA.Ward : '-'}}</p>
+                    </div>
+                  </div>
+                </fieldset>
+
+                <fieldset class="form-horizontal" style="padding-bottom: 0px;">
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label">เลือกผู้ยืม :</label>
+                    <div class="col-sm-3">
+                      <div class="input-group" style="margin-bottom: 15px;">
+                        <input class="form-control text-center" type="text" id="MDBID" ng-model="vm.dataB.id"
+                          ng-enter="vm.selList_B()" placeholder="- กรุณาเลือก -" readonly>
+                        <div class="input-group-btn dropdown">
+                          <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.selList_B()">
+                            <span class="caret"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">ชื่อ - นามสกุล :</label>
+                    <div class="col-sm-6" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataB.fullname != '' ? vm.dataB.fullname : '-'}}</p>
+                    </div>
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">เบอร์โทรศัพท์ 1 :</label>
+                    <div class="col-sm-2" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataB.tel != '' ? vm.dataB.tel : '-'}}</p>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">ที่อยู่ :</label>
+                    <div class="col-sm-6" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataB.address != '' ? vm.dataB.address : '-'}}</p>
+                    </div>
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">เบอร์โทรศัพท์ 2 :</label>
+                    <div class="col-sm-2" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataB.tel2 != '' ? vm.dataB.tel2 : '-'}}</p>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">ความสัมพันธ์ :</label>
+                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                      <p class="form-control-static">{{vm.dataB.conn != '' ? vm.dataB.conn : '-'}}</p>
+                    </div>
+                  </div>
+
+
+                </fieldset>
+
+                <fieldset class="form-horizontal" style="padding-bottom: 0px; margin-bottom: -30px;">
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label">เลือกผู้รับรอง :</label>
+                    <div class="col-sm-3">
+                      <div class="input-group" style="margin-bottom: 15px;">
+                        <input class="form-control text-center" type="text" id="MDCID" ng-model="vm.dataC.id"
+                          ng-enter="vm.selList_C()" placeholder="- กรุณาเลือก -" readonly>
+                        <div class="input-group-btn dropdown">
+                          <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.selList_C()">
+                            <span class="caret"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">ชื่อ - นามสกุล :</label>
+                    <div class="col-sm-6" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataC.fullname != '' ? vm.dataC.fullname : '-'}}</p>
+                    </div>
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">เบอร์โทรศัพท์ 1 :</label>
+                    <div class="col-sm-2" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataC.tel != '' ? vm.dataC.tel : '-'}}</p>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">ที่อยู่ :</label>
+                    <div class="col-sm-6" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataC.address != '' ? vm.dataC.address : '-'}}</p>
+                    </div>
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">เบอร์โทรศัพท์ 2 :</label>
+                    <div class="col-sm-2" style="margin-bottom: 0px;">
+                      <p class="form-control-static">{{vm.dataC.tel2 != '' ? vm.dataC.tel2 : '-'}}</p>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">ตำแหน่ง :</label>
+                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                      <p class="form-control-static">{{vm.dataC.pos != '' ? vm.dataC.pos : '-'}}</p>
+                    </div>
+                    <label class="col-sm-2 control-label" style="margin-bottom: 0px;">สังกัด :</label>
+                    <div class="col-sm-2" style="margin-bottom: 5px;">
+                      <p class="form-control-static">{{vm.dataC.attn != '' ? vm.dataC.attn : '-'}}</p>
+                    </div>
+                  </div>
+
+                </fieldset>
+              </div>
+            </uib-tab>
+            <uib-tab index="2" heading="STEP 2 : เลือกรายการยืมอุปกรณ์" ng-click="vm.Tabs('2')"
+              disable="vm.disableKEy_step2">
+
+              <fieldset class="form-horizontal">
+
+                <h5 style="text-align: center;">รายละเอียดการทำรายการ</h5>
+                <hr>
+                <div class="form-group" style="margin-bottom: 0px;">
+                  <label class="col-sm-2 control-label">วันที่ยืม(ค.ศ) :</label>
+                  <div class="col-sm-4">
+                    <div class="input-group" style="margin-bottom: 15px;">
+                      <input type="text" class="form-control text-center" ng-model="vm.loan_date" ng-required="true"
+                        is-open="vm.loan_up.opened" uib-datepicker-popup="dd/MM/yyyy"
+                        datepicker-options="vm.loan_dateOptions" close-text="Close" ui-mask="99/99/9999"
+                        ui-mask-placeholder ui-mask-placeholder-char="_" placeholder="DD/MM/YYYY"
+                        model-view-value="true" />
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.loan_calendar()">
+                          <span class="ion ion-md-calendar"></span></button>
+                      </div>
+                    </div>
+                  </div>
+                  <label class="col-sm-2 control-label">กำหนดคืน(ค.ศ) :</label>
+                  <div class="col-sm-4">
+                    <div class="input-group" style="margin-bottom: 15px;">
+                      <input type="text" class="form-control text-center" ng-model="vm.returned_date" ng-required="true"
+                        is-open="vm.returned_up.opened" uib-datepicker-popup="dd/MM/yyyy"
+                        datepicker-options="vm.returned_dateOptions" close-text="Close" ui-mask="99/99/9999"
+                        ui-mask-placeholder ui-mask-placeholder-char="_" placeholder="DD/MM/YYYY"
+                        model-view-value="true" />
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.returned_calendar()">
+                          <span class="ion ion-md-calendar"></span></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr style="margin-top: 5px; margin-bottom: -5px;">
+                <br>
+                <div class="form-group col-sm-3 pull-right"
+                  style="margin-right: -30px; margin-left: -30px; margin-top: 10px;">
+                  <div class="col-sm-12">
+                    <div class="input-group" style="margin-bottom: 10px;">
+                      <input class="form-control" type="text" ng-enter="vm.selList_items()" style="text-align: center;"
+                        placeholder="ค้นหาอุปกรณ์" readonly>
+                      <div class="input-group-btn dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" ng-click="vm.selList_items()">
+                          <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="col pull-left pb" style="color: gray;  padding: 15px 0px 15px 10px; margin-top: 12px;">
+                  เลือกรายการทั้งหมด {{vm.select_items.length}} รายการ
+                </div>
+                  <table class="table table-striped" style="border-top: 1px solid rgba(0, 0, 0, 0.045);">
+                    <thead>
+                      <tr>
+                     
+                        <th scope="col " width="8%" style="text-align: center;">รหัสอุปกรณ์</th>
+                        <th scope="col " width="30%" style="text-align: center;">รายละเอียด</th>
+                        <th scope="col " width="22%" style="text-align: center;">เลขที่ครุภัณฑ์</th>
+                        <th scope="col " width="10%" style="text-align: center;">เงินมัดจำ</th>
+                        <th scope="col " width="14%" style="text-align: center;">กำหนดคืน</th>
+                        <th scope="col " width="3%" style="text-align: center;">รูปภาพ</th>
+                        <th scope="col " width="3%" style="text-align: center;">อัพโหลด</th>
+                        <th scope="col " width="3%" style="text-align: center;">#</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="order in vm.select_items">
+                        <td style="text-align: center;">{{order.AST_ASSET}}</td>
+                        <td style="text-align: center;">{{order.AST_DESC}}</td>
+                        <td style="text-align: center;">{{order.AST_INV_NBR}}</td>
+                        <td style="text-align: center;">
+                          <input type="text" class="form-control text-center" ng-model="vm.dep[$index]"
+                            oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                            ng-blur="vm.blurInputDep(vm.dep[$index],$index)" awnum="price">
+                        </td>
+                        <td style="text-align: center;">
+
+                          <input type="text" class="form-control text-center" ng-model="vm.loop_date[$index]"
+                            ng-required="true" is-open="vm.loop_up[$index].opened" uib-datepicker-popup="dd/MM/yyyy"
+                            datepicker-options="vm.loop_dateOptions" close-text="Close" ui-mask="99/99/9999"
+                            ui-mask-placeholder ui-mask-placeholder-char="_" placeholder="DD/MM/YYYY"
+                            model-view-value="true" ng-click="vm.loop_calendar($index)" />
+                        </td>
+
+                        <td style="text-align: center;">
+                          <img ng-src="{{order.AST_PIC}}"
+                            style="width: 45px; height: 45px; border: solid 1px #e5e5e5; cursor: zoom-in;"
+                            ng-click="vm.showIMG(order.AST_PIC)" />
+                        </td>
+                        <td style="text-align: center;" ng-click="vm.reVals(order,$index)">
+                          <div class="image-upload" style="text-align: center; padding-top: 5px;">
+                            <label for="fileInput" style="padding: 5px 8px 5px 8px;
+                                white-space: nowrap;
+                                border-radius: 2px;
+                                box-shadow: 1px 1px 2px;
+                                background-color: #ebebeb;
+                                cursor: pointer;"> <span class="glyphicon glyphicon-folder-open"></span>&nbsp; รูปภาพ
+                            </label>
+
+                            <input id="fileInput" type="file" />
+                          </div>
+                        </td>
+                        <td style="text-align: center;">
+                          <button class="btn btn-danger btn-sm" ng-click="vm.delItems($index)">
+                            <span class="glyphicon glyphicon-minus"></span>
+                          </button></td>
+                      </tr>
+                      <tr>
+                        <td colspan="8" ng-if="vm.select_items.length == 0" style="text-align: center; padding: 8px;">
+                          ไม่พบข้อมูล</td>
+                      </tr>
+                      <tr>
+                        <td colspan="8" ng-if="vm.select_items.length > 0"
+                          style="text-align: right; padding: 8px;  color: gray;">
+                          รวมทั้งหมด {{ vm.total().price | number }} บาท
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                <p ng-if="vm.alert_error == true" style="color: red;">หมายเหตุ : รายการที่ท่านเลือกมีการยืมไปแล้ว
+                  กรุณาตรวจสอบรายการ ดังต่อไปนี้</p>
+                <ul>
+                  <li ng-repeat=" opt in vm.alert_no" style="color: red;">
+                    {{ opt }}
+                  </li>
+                </ul>
+                </pre>
+              </fieldset>
+            </uib-tab>
+            <uib-tab index="3" heading="STEP 3 : ยืนยันรายการ" ng-click="vm.Tabs('3')" disable="vm.disableKEy_step3">
+              <div class="container-fluid">
+                <fieldset>
+                  <div class="form-group" style="margin-bottom: 0px;">
+                    <div class="toolset pull-right">
+                      <!-- <button class="btn btn-info" type="button" style="border-radius: 3px;" ng-click="vm.print()">
+                        <span class="glyphicon glyphicon-print"></span> PRINT
+                      </button> -->
+                      <button class="btn btn-success" type="button" ng-click="vm.save()" style="border-radius: 3px;">
+                        <span class="glyphicon glyphicon-floppy-saved"></span> SAVE
+                      </button>
+                    </div>
+                  </div>
+                </fieldset>
+                <!-- Preview Report -->
+                <div class="row" style="background-color: rgb(224, 224, 224); overflow:auto; text-align: center;
+                padding: 20px 0px 10px 0px;">
+                  <div id="canvas" />
+                </div>
+                <!-- Preview Report -->
+
+              </div> <!-- End Container -->
+            </uib-tab>
+          </uib-tabset>
+
+          <div class="col" style="margin-top:10px;">
+            <button class="btn btn-light" type="button" ng-click="vm.ActiveTabs('1')" fl style="border-radius: 5px;
+                        float: left;" ng-hide="vm.active == 1">
+              <span class="glyphicon glyphicon-backward"></span> Previous
+            </button>
+            <button class="btn btn-light" type="button" ng-click="vm.ActiveTabs('2')" style="border-radius: 5px;
+                      float: right;" ng-hide="vm.active == 3">
+              Next <span class="glyphicon glyphicon-forward"></span>
+            </button>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width: auto;
+    height: 300px;
+  }
+
+  .red {
+    color: red;
+  }
+
+  .image-upload>input {
+    display: none;
+  }
+
+  .IMG {
+    height: 560px;
+  }
+
+  .nav>li.disabled>a:focus,
+  .nav>li.disabled>a:hover {
+    color: #777;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: transparent;
+  }
+</style>

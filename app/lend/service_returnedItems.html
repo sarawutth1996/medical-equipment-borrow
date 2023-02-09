@@ -1,0 +1,210 @@
+<script type="text/ng-template" id="SETreturned_upload.modal">
+    <div class="card m">
+        <div class="card-heading">
+          <div class="card-title"> รูปภาพ </div>
+        </div>
+        
+        <div class="card-footer">
+          <form name="Edit" class="form-horizontal">	
+            <center>		
+             <div class="cropArea">
+              <img-crop image="myImage" area-type="circle" result-image="myCroppedImage" result-image-size="500">
+              </img-crop>
+            </div>
+          </center>
+          <div class="form-group pt m0">
+              <div class="col-sm-4 col-sm-offset-4">
+                <button class="btn btn-raised btn-success ripple w-100" type="button" ng-click="vm.selectIMG('myCroppedImage')"> ตกลง </button>
+              </div>
+            </div>
+          </form>
+         
+        </div>   <!-- footer -->
+      </div>			
+    
+</script>
+
+<script type="text/ng-template" id="MDshowIMG.modal">
+<img class="IMG" ng-src="{{Modal_IMG}}" style="width:100%"/>
+</script>
+
+<section id="service_returnedItems">
+    <div class="container-fluid">
+        <div class="card mb0">
+            <div class="card-body">
+                <fieldset>
+                    <div class="card-heading pb0 pr0">
+                        <h5 class="pull-left m0">รายละเอียด ยืม-คืนอุปกรณ์</h5>
+                    </div>
+                </fieldset>
+               
+                <div class="form-horizontal">
+                    <table class="table table-bordered">
+                        <colgroup>
+                            <col width="50%" />
+                            <col width="50%" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>เลขที่ใบยืม</th>
+                                <td>{{vm.noNBR}}</td>
+                            </tr>
+                            <tr>
+                                <th>ชื่อ - นามสกุล(ผู้มีสิทธิ์ยืม)</th>
+                                <td>{{vm.result.CASE_ID}}</td>
+                            </tr>
+                            <tr>
+                                <th>ชื่อ - นามสกุล(ผู้ยืม)</th>
+                                <td>{{vm.result.CASE_REF}}</td>
+                            </tr>
+                            <tr>
+                                <th>ชื่อ - นามสกุล(ผู้รับรอง)</th>
+                                <td>{{vm.result.CASE_REF2}}</td>
+                            </tr>
+                            <tr>
+                                <th>วันที่ยืม(เอกสาร)</th>
+                                <td>{{vm.result.loan}}</td>
+                            </tr>
+                            <tr>
+                                <th>กำหนดคืน(เอกสาร)</th>
+                                <td>{{vm.result.re}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="table-responsive">
+
+                    <div class="image-upload" style="text-align: center; padding-top: 5px;">
+                        <input id="fileInput" type="file" />
+                    </div>
+                    <div class="col pull-left pb">
+                        <label class="control-label">รายการยืมอุปกรณ์มีดังนี้</label>
+                    </div>
+                   
+                        <table class="table table-striped m0" style="border-top: 1px solid rgba(0, 0, 0, 0.045);">
+                            <thead>
+                                <tr>
+                                    <th scope="col " width="10%" style="text-align: center;">รหัสอุปกรณ์</th>
+                                    <th scope="col " width="30%" style="text-align: center;">รายละเอียด</th>
+                                    <th scope="col " width="20%" style="text-align: center;">เลขที่ครุภัณฑ์</th>
+                                    <th scope="col " width="10%" style="text-align: center;">กำหนดคืน</th>
+                                    <th scope="col " width="6%" style="text-align: center;">สถานะ</th>
+                                    <th scope="col " width="7%" style="text-align: center;">รูปภาพ(ยืม)</th>
+                                    <th scope="col " width="7%" style="text-align: center;">รูปภาพ(คืน)</th>
+                                    <th scope="col " width="5%" style="text-align: center;">อัพโหลด</th>
+                                    <th scope="col " width="5%" style="text-align: center;"
+                                        ng-if="vm.inv_status !== 'RETURNED'">
+                                        <input type="checkbox" class="largerCheckbox" ng-model="vm.saLL"
+                                            ng-change="vm.checkboxAll()">
+                                    </th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="order in vm.items">
+                                    <td style="text-align: center;">{{order.ro_id}}</td>
+                                    <td style="text-align: center;">{{order.ro_desc}}</td>
+                                    <td style="text-align: center;">{{order.ast_inv_nbr}}</td>
+                                    <td style="text-align: center;">{{order.dateitems}}</td>
+                                    <td style="text-align: center;" ng-if="order.ro_active_stat == 'BORROW'">
+                                        <span style="background-color: #ddd;
+                        padding-top:6px;
+                        padding-bottom:6px;
+                        padding-left:15px;
+                        padding-right:15px;
+                        border-radius: 5px;
+                        white-space:nowrap;">ยืม</span>
+                                    </td>
+                                    <td style="text-align: center;" ng-if="order.ro_active_stat == 'RETURNED'">
+                                        <span style="    background-color: #4caf50;
+                        padding-top:6px;
+                        padding-bottom:6px;
+                        padding-left:15px;
+                        padding-right:15px;
+                        border-radius: 5px;
+                        white-space:nowrap;
+                        color: white
+                        ">คืน</span>
+                                    </td>
+
+                                    <td style="text-align: center;">
+                                        <img ng-src="{{order.ro_pic_old}}"
+                                            style="width: 45px; height: 45px; border: solid 1px #e5e5e5; cursor: zoom-in;"
+                                            ng-click="vm.showIMG(order.ro_pic_old)" />
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <img ng-src="{{order.ro_pic_new}}"
+                                            style="width: 45px; height: 45px; border: solid 1px #e5e5e5; cursor: zoom-in;"
+                                            ng-click="vm.showIMG(order.ro_pic_new)" />
+                                    </td>
+
+                                    <td style="text-align: center;" ng-show="order.ro_active_stat == 'BORROW'">
+                                        <div class="image-upload" style="text-align: center; padding-top: 5px;">
+                                            <label for="fileInput" style="padding: 5px 12px 5px 12px;
+                              white-space: nowrap;
+                              border-radius: 2px;
+                              box-shadow: 1px 1px 2px;
+                              background-color: #ebebeb; 
+                              cursor: pointer;" ng-click="vm.reVals_returen(order,$index)">
+                                                <span class="glyphicon glyphicon-folder-open"></span>&nbsp; รูปภาพ
+                                            </label>
+                                            <input type="file" id="fileInput">
+                                        </div>
+                                    </td>
+                                    <td style="text-align: center;" ng-show="order.ro_active_stat == 'RETURNED'">
+                                        <div style="text-align: center; padding-top: 5px;">
+                                            <label style="padding: 5px 8px 5px 8px;
+                              white-space: nowrap;
+                              border-radius: 2px;
+                              box-shadow: 1px 1px 2px;
+                              background-color: #ebebeb; 
+                              cursor:not-allowed;
+                              opacity: 0.7;">
+                                                <span class="glyphicon glyphicon-folder-open"></span>&nbsp; รูปภาพ
+                                            </label>
+                                        </div>
+                                    </td>
+
+                                    <td style="text-align: center;" ng-if="vm.inv_status !== 'RETURNED'">
+                                        <input type="checkbox" class="largerCheckbox" ng-model="vm.selected[$index]"
+                                            ng-change="vm.checkboxONCE()" ng-if="order.ro_active_stat !== 'RETURNED'">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div style="text-align: center; margin-top: 25px; margin-bottom: 10px;"
+                            ng-hide="vm.inv_status == 'RETURNED'">
+                            <button class="btn btn-success text-bold btn-md btn-raised m0"
+                                ng-click="vm.returned_item(vm.noNBR)">
+                                คืนอุปกรณ์</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    input.largerCheckbox {
+        transform: scale(1.2);
+    }
+
+    .cropArea {
+        background: #E4E4E4;
+        overflow: hidden;
+        width: auto;
+        height: 300px;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .image-upload>input {
+        display: none;
+    }
+
+    .IMG {
+        height: 560px;
+    }
+</style>
