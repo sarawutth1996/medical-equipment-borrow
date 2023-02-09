@@ -11,7 +11,7 @@ Tool :
 <div>UI-Framwork : Bootstrap </div>
 <p>
 <h3>
-Screen Short :
+Screenshot :
 </h3>
 <p/>
 <hr/>
