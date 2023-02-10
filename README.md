@@ -18,21 +18,20 @@ Features of a typical medical equipment management system include:
 5. Reporting: The system can generate a range of reports, including equipment inventory reports, maintenance reports, usage reports, and calibration reports, providing valuable insights into the performance of the medical equipment.
 </p>
 
-<h3>
-Tool :
-</h3>
+
+## Tool :
 <p/>
-<hr/>
 <div>Programming : AngularJS / PHP </div>
 <div>UI-Framwork : Bootstrap </div>
 <p>
-<h3>
-Screenshot :
-</h3>
-<p/>
-<hr/>
-<img src="screen/screen-001.JPG" alt="login"/>
 
-<img src="screen/screen-002.JPG" alt="login"/>
+## Screenshot :
+
+<p/>
+
+<div align="center">
+<img src="screen/screen-001.JPG" alt="login" width="41%"/> &nbsp; &nbsp;
+<img src="screen/screen-002.JPG" alt="login" width="40%"/>
+</div>
 
 
