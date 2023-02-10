@@ -1,4 +1,4 @@
-# medical-equipment borrow 
+# medical equipment borrow 
 <p>
 A medical equipment management system is a software solution that helps hospitals and healthcare facilities manage their medical equipment inventory and maintenance activities. The primary goal of a medical equipment management system is to ensure that medical equipment is properly maintained, safe to use, and available when needed.
 <p/>
