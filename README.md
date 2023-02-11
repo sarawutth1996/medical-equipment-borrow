@@ -13,7 +13,7 @@ Features of a typical medical equipment management system include:
 2. Maintenance Tracking: The system can be used to track maintenance activities for each piece of equipment, including regular check-ups, repairs, and replacement of parts.
 3. Equipment Calibration: The system can help ensure that equipment is calibrated and operating within specified limits, and can generate reminders for equipment calibration due dates.
 
-4. Equipment Usage Tracking: The system can track how often equipment is used, how long it is used, and who is using it, helping to improve utilization and minimize downtime.
+4. Equipment Usage Tracking: The system can track how often equipment is used, how long it is used, and who is using it, helping to improve utilization.
 
 5. Reporting: The system can generate a range of reports, including equipment inventory reports, maintenance reports, usage reports, and calibration reports, providing valuable insights into the performance of the medical equipment.
 </p>
